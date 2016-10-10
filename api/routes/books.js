@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET books listing. */
 var data={
-    "book_name":'js权威指南',
+    "book_name":'js权威指南第六版',
     "book_price":"￥123.00"
 };
 router.get('/', function(req, res, next) {
