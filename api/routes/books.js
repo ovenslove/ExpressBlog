@@ -1,13 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+/* GET books listing. */
 var data={
-    "code":100000,
-    "text":"你好，我是聪明可爱的机器人"
+    "book_name":'js权威指南',
+    "book_price":"￥123.00"
 };
 router.get('/', function(req, res, next) {
-    res.json(data);
+    var _callback = req.query.callback;
+    if (_callback){
+        res.type('text/javascript');
+        res.send(_callback + '(' + JSON.stringify(data) + ')');
+    }
+    else{
+        res.json(_data);
+    }
 });
 
 module.exports = router;
