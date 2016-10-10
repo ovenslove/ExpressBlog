@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
         res.send(_callback + '(' + JSON.stringify(data) + ')');
     }
     else{
-        res.json(_data);
+        res.json(data);
     }
 });
 
