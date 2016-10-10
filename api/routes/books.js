@@ -3,12 +3,11 @@ var router = express.Router();
 
 /* GET users listing. */
 var data={
-    'name':'js权威指南',
-    'price':'￥111.00'
-}
+    "code":100000,
+    "text":"你好，我是聪明可爱的机器人"
+};
 router.get('/', function(req, res, next) {
     res.json(data);
-    // res.send('respond with a aaaa');
 });
 
 module.exports = router;
