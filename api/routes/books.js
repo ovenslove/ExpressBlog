@@ -7,7 +7,8 @@ var data={
     'price':'￥111.00'
 }
 router.get('/', function(req, res, next) {
-    res.json(data);
+    // res.json(data);
+    res.send('respond with a aaaa');
 });
 
 module.exports = router;
