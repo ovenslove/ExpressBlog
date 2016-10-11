@@ -1,7 +1,28 @@
 extends layout
 
 block content
-    link(rel='stylesheet', href='/css/index.css')
-    .main-box
-        p 你好，我是最帅的
+    link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
+    link(rel='stylesheet',type="text/css", href='/css/index.css')
+    script(src="/bower_components/jquery/dist/jquery.min.js")
+    script(src="/bower_components/semantic/dist/semantic.min.js")
 
+    header
+       .nav
+           ul
+    .main-box
+        each  val,key in list
+            .ui.items
+                .item
+                    .image.image-box
+                        img(src='/images/preimg.jpeg')
+                    .content
+                        a.header #{val.title}
+                        .meta
+                            span #{val.intr}
+                        .description
+                            p
+                        .extra
+                            | #{val.info}
+
+    footer
+        p copyright

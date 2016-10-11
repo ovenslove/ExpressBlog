@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "./node_modules/.bin/nodemon bin/www"
+    "start": "./node_modules/.bin/nodemon bin/www",
+    "browser": "browser-sync start --proxy http://localhost:3003 --files ./**/*",
+    "gulp": "gulp"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -16,6 +18,7 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-imagemin": "^3.0.3",
     "gulp-jshint": "^2.0.1",
