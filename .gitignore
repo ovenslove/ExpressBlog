@@ -1,3 +1,5 @@
 /.idea
 /node_modules/
-/api//node_modules/
+/api/node_modules/
+/api/sass/
+/api/js/
