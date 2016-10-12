@@ -13,29 +13,18 @@ var blogSchema  = new mongoose.Schema({
 /* GET home page. */
 var data={
   'title':'API首页',
-  'list':[
-    /*{'title':'我是第一个','intr':'这里是我的简介','info':'我就是正文啊。看我看我我就是正文啊。看我看我我就是正文啊。看我看我我就是正文啊。看我看我我就是正文啊。看我看我我就是正文啊。看我看我我就是正文啊。看我看我'},
-    {'title':'我是第二个','intr':'这里是我的简介这里是我的简介这里是我的简介','info':'我就是正文啊。看我看我我就是正文啊。看我看我我就是正文啊。看我看我我就是正文啊。看我看我我就是正文啊。看我看我我就是正文啊。看我看我'},
-    {'title':'我是第一个','intr':'这里是我的简介','info':'我就是正文啊。看我看我'},
-    {'title':'我是第二个我是第二个我是第二个','intr':'这里是我的简介','info':'我就是正文啊。看我看我'},
-    {'title':'我是第一个','intr':'这里是我的简介','info':'我就是正文啊。看我看我'},
-    {'title':'我是第二个我是第二个我是第二个我是第二个','intr':'这里是我的简介','info':'我就是正文啊。看我看我'},
-    {'title':'我是第一个','intr':'这里是我的简介','info':'我就是正文啊。看我看我'},
-    {'title':'我是第二个我是第二个我是第二个','intr':'这里是我的简介','info':'我就是正文啊。看我看我'},
-    {'title':'我是第一个','intr':'这里是我的简介','info':'我就是正文啊。看我看我'},
-    {'title':'我是第二个我是第二个','intr':'这里是我的简介','info':'我就是正文啊。看我看我'},
-    {'title':'我是第二个','intr':'这里是我的简介','info':'我就是正文啊。看我看我'},
-    {'title':'我是第二个我是第二个我是第二个我是第二个我是第二个我是第二个','intr':'这里是我的简介','info':'我就是正文啊。看我看我'},
-    {'title':'我是第三个','intr':'这里是我的简介','info':'我就是正文啊。看我看我'}*/
-  ]
+  'list':[]
 }
 
 router.get('/', function(req, res, next) {
     var blogModel = db.model('blog',blogSchema);
      blogModel.find(function (err, blogs) {
-        data.list.push(blogs);
+        data.list=blogs;
+         // res.send(data);
+         res.render('index', data);
      });
-    res.render('index', data);
+
+
 });
 
 module.exports = router;
