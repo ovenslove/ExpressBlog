@@ -14,9 +14,9 @@ block content
             .ui.items
                 .item
                     .image.image-box
-                        img(src='/images/preimg.jpeg')
+                        img(src=val.imgUrl)
                     .content
-                        a.header #{val.title}
+                        a.header(href=" /blogs/#{val._id}" ) #{val.title}
                         .meta
                             span #{val.intr}
                         .description

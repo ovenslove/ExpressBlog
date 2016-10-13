@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
+    link(rel='stylesheet',type="text/css", href='/css/index.css')
+    script(src="/bower_components/jquery/dist/jquery.min.js")
+    script(src="/bower_components/semantic/dist/semantic.min.js")
+
+    header
+        .nav
+
+    .main-box
+        article
+            h3  #{blog.title}
+            p
+                span 作者： #{blog.author}
+                br
+                span 发布时间： #{new Date(blog.addTime).toLocaleString()}
+            p #{blog.intr}
+            .content #{blog.content}
+
+            p
+                each  val in blog.mark
+                    span #{val}
+
+    footer
+        p Copyright © 2016 Oven Liu. All rights reserved.
+
+

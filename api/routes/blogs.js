@@ -17,18 +17,19 @@ var blogSchema  = new mongoose.Schema({
 
 /* GET home page. */
 var data={
-  'title':'API首页',
-  'list':[]
+    'title':'博客页',
+    'blog':{}
 }
-
-router.get('/', function(req, res, next) {
+/*57ffb8c2328981299c302367*/
+router.get('/blogs/:id', function(req, res, next) {
+    var _id=req.params.id;
+    // res.send(_id);
     var blogModel = db.model('blog',blogSchema);
-     blogModel.find(function (err, blogs) {
-        data.list=blogs;
-         // res.send(data);
-         res.render('index', data);
-     });
-
+    blogModel.find({'_id':_id},function (err, blogs) {
+    data.blog=blogs[0];
+    // res.send(data);
+    res.render('books', data);
+    });
 
 });
 
