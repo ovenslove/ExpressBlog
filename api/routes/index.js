@@ -18,6 +18,7 @@ var blogSchema  = new mongoose.Schema({
 /* GET home page. */
 var data={
   'title':'API首页',
+  'webSiteName':'ExpressBlog',
   'list':[]
 }
 

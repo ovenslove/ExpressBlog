@@ -28,7 +28,7 @@ router.get('/blogs/:id', function(req, res, next) {
     blogModel.find({'_id':_id},function (err, blogs) {
     data.blog=blogs[0];
     // res.send(data);
-    res.render('books', data);
+    res.render('blogs', data);
     });
 
 });

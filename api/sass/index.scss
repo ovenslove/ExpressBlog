@@ -35,3 +35,58 @@ footer{
   padding: 10px;
   font-size:14px;
 }
+
+/*header*/
+header{
+  .nav{
+    width: 100%;
+    max-width:1280px;
+    height:100%;
+    margin: auto;
+    .logo-container{
+      height:100%;
+      width: auto;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 20px;
+        span.logo-word{
+          font-size:26px;
+          font-weight:700;
+          font-family:黑体;
+          color: #FFFFFF;
+          vertical-align: middle;
+          height:100%;
+          line-height:60px;
+          display: block;
+        }
+    }
+    /*------*/
+    ul.nav-group{
+      display: inline-block;
+      vertical-align: middle;
+      height:100%;
+       li.nav-item{
+         display: inline-block;
+         //float: left;
+         height:100%;
+         list-style:none;
+         padding: 0 30px;
+         font-size:16px;
+         color: #FFFFFF;
+         line-height:60px;
+         cursor: pointer;
+         &:hover{
+           background: #666666;
+           color: #00B7FF;
+         }
+       }
+    }
+    /*search-container*/
+    .search-container{
+      height:100%;
+      width: auto;
+      float: right;
+      line-height:60px;
+    }
+  }
+}
