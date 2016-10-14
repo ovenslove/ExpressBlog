@@ -1,13 +1,13 @@
-extends layout
+extends layout/layout
 
 block content
     link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
     link(rel='stylesheet',type="text/css", href='/css/index.css')
+    link(rel='stylesheet',type="text/css", href='/bower_components/nprogress/nprogress.css')
+    script(src="/bower_components/nprogress/nprogress.js")
     script(src="/bower_components/jquery/dist/jquery.min.js")
     script(src="/bower_components/semantic/dist/semantic.min.js")
-
-    header
-        .nav
+    include layout/header
 
     .main-box
         article
@@ -23,7 +23,6 @@ block content
                 each  val in blog.mark
                     span #{val}
 
-    footer
-        p Copyright © 2016 Oven Liu. All rights reserved.
+    include layout/footer
 
 

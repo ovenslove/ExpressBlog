@@ -1,4 +1,4 @@
-extends layout
+extends layout/layout
 
 block content
     link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
@@ -8,21 +8,8 @@ block content
     script(src="/bower_components/jquery/dist/jquery.min.js")
     script(src="/bower_components/semantic/dist/semantic.min.js")
     script NProgress.start();
-    header
-       .nav
-           .logo-container
-               span.logo-word  #{webSiteName}
-           ul.nav-group
-               li.nav-item HOME
-               li.nav-item DEMO
-               li.nav-item ABOUT
-               li.nav-item CONNECT
-           .search-container
-               .ui.search
-                   .ui.icon.input
-                       input.prompt(type='text', placeholder='searching...')
-                       i.search.icon
-                   .results
+    include layout/header
+
     script NProgress.set(0.2)
     .main-box
         each  val,key in list
@@ -38,9 +25,7 @@ block content
                             p
                         .extra
                             | #{val.info}
-
-    footer
-        p Copyright © 2016 Oven Liu. All rights reserved.
+    include layout/footer
 
     script
         | $(function(){NProgress.done();})
