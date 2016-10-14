@@ -1,23 +1,16 @@
 var mongoose=require('mongoose');
-
-var db =mongoose.createConnection('localhost','blog'); //创建一个数据库连接
-var blogSchema  = new mongoose.Schema({
-    blogId:Number,  //文章ID
-    title:String,   //定义一个属性name，类型为String
-    imgUrl:String,  //列表预览照片
-    author:String,   //定义一个属性name，类型为String
-    intr:String,    //简介
-    addTime:Date,       //生成时间
-    updateTime:Date,    //更新时间
-    mark:Array,         //标签组
-    content:String,     //正文
-});
-
+//创建一个数据库连接
+var db =mongoose.createConnection('localhost','blog');
+/*引入blogsSchema配置文件*/
+var blogsSchemaConf=require('./schema/blogsSchema.js');
+/*生成一个schema*/
+var blogSchema  = new mongoose.Schema(blogsSchemaConf);
+/*根据schema生成模型*/
 var blogModel = db.model('blog',blogSchema);
-
+/*生成一个实体*/
 // var blogEntity = new blogModel({title:'我就是标题','author':'ovenslove','intr':'我就是简介，看我看我','info':'别动，我是从mongodb出来的摘要'});
 
-for(var i=10;i<30;i++){
+for(var i=50;i<60;i++){
     var blogEntity= new blogModel({
         blogId:1,
         title:'我就是标题'+i,
@@ -27,19 +20,9 @@ for(var i=10;i<30;i++){
         addTime:new Date(),
         updateTime:new Date(),
         mark:['标签一','标签二','标签三','标签四',],
-        content:'大家好，我就是正文内容，别看我少，我还是很有价值的！大家好，我就是正文内容，' +
-        '别看我少，我还是很有价值的！大家好，我就是正文内容，别看我少，我还是很有价值的！大家好，' +
-        '我就是正文内容，别看我少，我还是很有价值的我还是很有价值的我还是很有价值的我还是很有' +
-        '价值的我还是很有价值的我还是很有价值的我还是很有价值的！'
+        content:'我们都知道mongodb是一种面向文档的数据库，但是它的灵活性并不意味着你不需要对其进行结构设计，在代码实施之前进行结构设计是十分必要的。' +
+        '一个在nodejs中使用的对mongodb进行建模的工具，可以定义一些Schema（定义每个doc里的字段名、类型、初始值、验证条件等），增删改查等，功能比较贴心'
     });
     console.log(blogEntity.title);
     blogEntity.save()
 }
-
-
-
-// blogEntity.save();
-/*
-blogModel.find(function (err, blogs) {
-    console.log(blogs);
-});*/

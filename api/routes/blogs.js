@@ -18,6 +18,7 @@ var blogSchema  = new mongoose.Schema({
 /* GET home page. */
 var data={
     'title':'博客页',
+    'webSiteName':'ExpressBlog',
     'blog':{}
 }
 /*57ffb8c2328981299c302367*/
@@ -28,7 +29,7 @@ router.get('/blogs/:id', function(req, res, next) {
     blogModel.find({'_id':_id},function (err, blogs) {
     data.blog=blogs[0];
     // res.send(data);
-    res.render('blogs', data);
+    res.render('showBlogs', data);
     });
 
 });

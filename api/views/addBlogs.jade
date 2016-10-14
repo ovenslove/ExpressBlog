@@ -1,0 +1,61 @@
+extends layout/layout
+
+block content
+    link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
+    link(rel='stylesheet',type="text/css", href='/css/wangEditor.css')
+    link(rel='stylesheet',type="text/css", href='/css/index.css')
+    link(rel='stylesheet',type="text/css", href='/css/blogEdit.css')
+    link(rel='stylesheet',type="text/css", href='/bower_components/nprogress/nprogress.css')
+    script(src="/bower_components/nprogress/nprogress.js")
+    script(src="/bower_components/jquery/dist/jquery.min.js")
+    script(src="/bower_components/semantic/dist/semantic.min.js")
+    include layout/header
+
+    .main-box
+        .ui.form
+            .field
+                label Blog Title
+                input(type='text')
+            .field
+                label Blog Introduce
+                textarea(rows='2')
+            .inline.field
+                .ui.toggle.checkbox
+                    input.hidden(type='checkbox', tabindex='0')
+                    label Lock
+            .field
+                label Blog PreviewImage
+                input(type='url')
+            .field
+                label Blog Marks
+                .ui.fluid.multiple.search.selection.dropdown
+                    input(type='hidden', name='receipt')
+                    i.dropdown.icon
+                    .default.text give your blog some beautiful marks
+                    .menu
+                        .item(data-value='jenny', data-text='Jenny')
+                            |  Jenny Hess
+                        .item(data-value='elliot', data-text='Elliot')
+                            |  Elliot Fu
+                        .item(data-value='stevie', data-text='Stevie')
+                            |  Stevie Feliciano
+                        .item(data-value='christian', data-text='Christian')
+                            |  Christian
+                        .item(data-value='matt', data-text='Matt')
+                            |  Matt
+                        .item(data-value='justen', data-text='Justen')
+                            |  Justen Kitsune
+            div.editor-container
+                div#editor-box
+            button.positive.ui.button#submit-btn
+                | 提交数据
+
+        div.editor-markdown-container
+
+
+    include layout/footer
+
+    script(src="/js/wangEditor.js")
+    script(src="/js/blogEdit.js")
+
+
