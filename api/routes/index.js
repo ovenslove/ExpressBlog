@@ -18,11 +18,22 @@ var data={
 router.get('/', function(req, res, next) {
     /*根据schema生成模型*/
     var blogModel = db.model('blog',blogSchema);
-     blogModel.find(function (err, blogs) {
+    /*不带limit()*/
+    blogModel.find({}).sort({'addTime':-1}).exec(function(err,blogs){
+        data.list=blogs;
+        res.render('index', data);
+    });
+    /*带limit()*/
+/*    blogModel.find({}).sort({'addTime':-1}).limit(30).exec(function(err,blogs){
+        data.list=blogs;
+        res.render('index', data);
+    });*/
+
+    /* blogModel.find(function (err, blogs) {
         data.list=blogs;
          // res.send(data);
          res.render('index', data);
-     });
+     });*/
 
 
 });

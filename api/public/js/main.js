@@ -111,6 +111,12 @@ editor.config.emotions = {
 //     normal: '<button style="font-size:20px; margin-top:5px;">I</button>',
 //     selected: '<button style="font-size:20px; margin-top:5px;"><i>I</i></button>'
 // };
+// 配置 onchange 事件
+editor.onchange = function () {
+    // 编辑区域内容变化时，实时打印出当前内容
+    $("#blogContent").val(this.$txt.html())
+};
+
 editor.create();
 
 
@@ -1863,6 +1869,20 @@ console.log('11ssssss');
 }());
 
 alert("111")
+function htmlencode(s){
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(s));
+    return div.innerHTML;
+}
+function htmldecode(s){
+    var div = document.createElement('div');
+    div.innerHTML = s;
+    return div.innerText || div.textContent;
+}
+window.onload=function () {
+    $(".content").html(htmldecode( $(".content-area").html()));
+
+};
 (function (factory) {
     if (typeof window.define === 'function') {
         if (window.define.amd) {

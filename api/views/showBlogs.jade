@@ -3,6 +3,7 @@ extends layout/layout
 block content
     link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
     link(rel='stylesheet',type="text/css", href='/css/index.css')
+    link(rel='stylesheet',type="text/css", href='/css/showBlogs.css')
     link(rel='stylesheet',type="text/css", href='/bower_components/nprogress/nprogress.css')
     script(src="/bower_components/nprogress/nprogress.js")
     script(src="/bower_components/jquery/dist/jquery.min.js")
@@ -11,18 +12,21 @@ block content
 
     .main-box
         article
-            h3  #{blog.title}
-            p
+            h2.blog-title  #{blog.title}
+            p.blog-info
                 span 作者： #{blog.author}
-                br
                 span 发布时间： #{new Date(blog.addTime).toLocaleString()}
-            p #{blog.intr}
-            .content #{blog.content}
+            p.blog-intr #{blog.intr}
+            .hidden.content-area(style="display:none") #{blog.content}
+            .content
+                .ui.segment
+                    .ui.active.inverted.dimmer
+                        .ui.text.loader
+                            | Loading
 
-            p
-                each  val in blog.mark
-                    span #{val}
+            each  val in blog.mark
+                a.ui.teal.tag.label #{val}
 
     include layout/footer
-
+    script(src="/js/showBlogs.js")
 

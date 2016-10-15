@@ -111,6 +111,12 @@ editor.config.emotions = {
 //     normal: '<button style="font-size:20px; margin-top:5px;">I</button>',
 //     selected: '<button style="font-size:20px; margin-top:5px;"><i>I</i></button>'
 // };
+// 配置 onchange 事件
+editor.onchange = function () {
+    // 编辑区域内容变化时，实时打印出当前内容
+    $("#blogContent").val(this.$txt.html())
+};
+
 editor.create();
 
 

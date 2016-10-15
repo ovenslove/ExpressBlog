@@ -15,6 +15,7 @@ var blogSchema  = new mongoose.Schema({
     content:String,     //正文
 });
 
+
 /* GET home page. */
 var data={
     'title':'博客页',

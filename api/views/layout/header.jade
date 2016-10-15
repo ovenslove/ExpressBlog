@@ -2,12 +2,17 @@ block content
     header
         .nav
             .logo-container
-                span.logo-word  #{webSiteName}
+                a(href="/")
+                    span.logo-word  #{webSiteName}
             ul.nav-group
-                li.nav-item HOME
-                li.nav-item DEMO
-                li.nav-item ABOUT
-                li.nav-item CONNECT
+                a(href="/")
+                    li.nav-item HOME
+                a(href="/addBlogs")
+                    li.nav-item NEWBLOG
+                a(href="/")
+                    li.nav-item ABOUT
+                a(href="/")
+                    li.nav-item CONNECT
             .search-container
                 .ui.search
                     .ui.icon.input
