@@ -19,6 +19,8 @@ var userModel = db.model('user',userSchema);
 /*-------------------数据库相关----------------------------*/
 
 /*-------------------权限认证相关----------------------------*/
+
+
 var passport = require('passport')
     , LocalStrategy = require('passport-local').Strategy;
 
@@ -53,8 +55,11 @@ passport.deserializeUser(function(user, done) {
 
 
 /*正常get请求*/
+router.get('/login', function(req, res, next) {
+    res.render('login',data);
+});
 
-/*对需要验证后进入的页面添加这个*/
+/*/!*对需要验证后进入的页面t添加这个*!/
 router.get('/login', function(req, res, next) {
     if(req.isAuthenticated()){
         console.log(req.isAuthenticated());
@@ -64,7 +69,7 @@ router.get('/login', function(req, res, next) {
     else{
         res.render('login', data);
     }
-});
+});*/
 
 
 /*表单提交请求*/
