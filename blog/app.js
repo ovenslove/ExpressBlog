@@ -13,6 +13,7 @@ var books = require('./routes/books');
 var blogs = require('./routes/blogs');
 var addBlogs = require('./routes/addBlogs');
 var login = require('./routes/login');
+var regist = require('./routes/regist');
 
 /*定义app*/
 var app = express();
@@ -37,6 +38,7 @@ app.use('/', books);
 app.use('/', blogs);
 app.use('/', addBlogs);
 app.use('/', login);
+app.use('/', regist);
 
 
 
