@@ -8,3 +8,44 @@
     -webkit-box-orient: vertical;
   }
 }
+.side-box{
+  display: none;
+  height:auto;
+  width: 50px;
+  position: fixed;
+  right:calc((100% - 1280px)/2 - 55px);
+  bottom:160px;
+  z-index:100;
+    ul{
+      display: block;
+      height:auto;
+      width: 50px;
+        li{
+          display: block;
+          list-style:none;
+          height:50px;
+          width: 50px;
+          background: #dddddd;
+          padding:10px;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+          color: #FFFFFF;
+          font-weight: 700;
+          cursor: pointer;
+          border-bottom: 1px solid #eeeeee;
+          &:hover{
+            background: #00B7FF;
+          }
+          i{
+            font-size:24px;
+            line-height:30px;
+            text-align: center;
+
+          }
+        }
+        li.back2top{
+          display: none;
+        }
+    }
+}

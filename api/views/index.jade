@@ -26,8 +26,18 @@ block content
                             p
                         .extra
                             | #{val.info}
+    .side-box
+        ul
+            a(href="https://github.com/",target="_blanck")
+                li.help-us
+                    i.github.icon
+            li.care-us
+                i.arrow.wechat.icon
+            li.back2top
+                i.arrow.circle.up.icon
     include layout/footer
 
     script
         | $(function(){NProgress.done();})
-
+    script(src="/js/jquery.mousewheel.js")
+    script(src="/js/index.js")
