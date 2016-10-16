@@ -129,6 +129,9 @@ $('.dropdown')
 /*回到顶部*/
 $(".back2top").on('click',function () {
     $('body').animate({ scrollTop: 0 }, 1000);
+    setTimeout(function () {
+        $(".side-box").slideUp(200);
+    },1000);
 });
 $(function () {
     $("body").scrollTop(0);

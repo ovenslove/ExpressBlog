@@ -8,6 +8,19 @@
     -webkit-box-orient: vertical;
   }
 }
+.sim-blog{
+  position: relative;
+}
+.sim-blog:not(:last-child)::after{
+  content: '';
+  position: absolute;
+  display: block;
+  height:0;
+  width: 100%;
+  border-bottom: 1px solid #f5f5f5;
+  bottom:-0.75em;
+  left:0;
+}
 .side-box{
   display: none;
   height:auto;
