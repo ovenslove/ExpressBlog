@@ -128,7 +128,7 @@ $('.dropdown')
 ;
 /*回到顶部*/
 $(".back2top").on('click',function () {
-    alert("11");
+    $('body').animate({ scrollTop: 0 }, 1000);
 });
 $(function () {
     $("body").scrollTop(0);
@@ -146,7 +146,6 @@ $("body").on('mousewheel', function(event) {
     }else {
         $(".back2top").slideUp(200);
     }
-    // console.log();
 });
 
 /*!
