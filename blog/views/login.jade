@@ -1,0 +1,35 @@
+extends layout/layout
+
+block content
+    link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
+    link(rel='stylesheet',type="text/css", href='/css/base.css')
+    link(rel='stylesheet',type="text/css", href='/css/login.css')
+    link(rel='stylesheet',type="text/css", href='/bower_components/nprogress/nprogress.css')
+    script(src="/bower_components/nprogress/nprogress.js")
+    script(src="/bower_components/jquery/dist/jquery.min.js")
+    script(src="/bower_components/semantic/dist/semantic.min.js")
+    include layout/header
+
+    .main-box
+        .login-container
+            form(action="/login",method="post").ui.form
+                .field
+                    label User Name:
+                    input(type='text', name='username', placeholder='Your Name')
+                .field
+                    label User Password:
+                    input(type='text', name='password', placeholder='Your Password')
+                .field
+                    .ui.checkbox
+                        input.hidden(type='checkbox', tabindex='0',checked=)
+                        label remember password
+                button.ui.button(type='submit') Submit
+
+                .field
+                    p.login-tips
+                        a(href="/regist")
+                            span(style="float:left") no account?
+                        a(href="/")
+                            span(style="float:right") forget password?
+    include layout/footer
+    script(src="/js/login.js")

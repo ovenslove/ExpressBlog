@@ -8,7 +8,7 @@ var cssmin=require('gulp-minify-css');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
-var imagemin = require('gulp-imagemin');
+// var imagemin = require('gulp-imagemin');
 
 /*js检查任务*/
 gulp.task('jshints', function() {
@@ -43,16 +43,16 @@ gulp.task('scripts',['jshints'], function() {
         .pipe(gulp.dest('./public/js'));
 });
 
-/*image照片压缩*/
+/*/!*image照片压缩*!/
 gulp.task('imgmin',function(){
-    gulp.src('./public/images/*')
+    gulp.src('./public/images/!*')
         .pipe(imagemin())
         .pipe(gulp.dest('./public/images'));
-})
+})*/
 
 // 默认任务
 gulp.task('default', function(){
-    gulp.run( 'sass', 'scripts','imgmin');
+    gulp.run( 'sass', 'scripts');
 });
 
 // 监听文件变化

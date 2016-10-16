@@ -10,7 +10,7 @@ var blogSchema  = new mongoose.Schema(blogsSchemaConf);
 
 /* GET home page. */
 var data={
-  'title':'API首页',
+  'title':'首页',
   'webSiteName':'ExpressBlog',
   'list':[]
 }

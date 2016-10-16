@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
-
-/*--------------------------------------------------------*/
 var session = require('express-session');
+var data={
+    title:'Login',
+    'webSiteName':'ExpressBlog'
+};
+
 /*-------------------数据库相关----------------------------*/
 var mongoose=require('mongoose');
 //创建一个数据库连接
@@ -14,9 +17,11 @@ var userSchema  = new mongoose.Schema(userSchemaConf);
 /*根据schema生成模型*/
 var userModel = db.model('user',userSchema);
 /*-------------------数据库相关----------------------------*/
+
 /*-------------------权限认证相关----------------------------*/
 var passport = require('passport')
     , LocalStrategy = require('passport-local').Strategy;
+
 passport.use(new LocalStrategy(
     function(username, password, done) {
         userModel.findOne({ username: username }, function(err, user) {
@@ -31,66 +36,38 @@ passport.use(new LocalStrategy(
         });
     }
 ));
+
 router.use(session({ secret: 'keyboard cat' , resave: false, saveUninitialized: false}));
 router.use(passport.initialize());
 router.use(passport.session());
+
+
 passport.serializeUser(function(user, done) {
     done(null, user);
 });
+
 passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 /*-------------------权限认证相关----------------------------*/
-/*--------------------------------------------------------*/
 
 
-/* GET books listing. */
-var data={
-   title:'新增博文',
-    'webSiteName':'ExpressBlog'
-};
+/*正常get请求*/
 
-router.get('/addBlogs', function(req, res, next) {
+/*对需要验证后进入的页面添加这个*/
+router.get('/login', function(req, res, next) {
     if(req.isAuthenticated()){
         console.log(req.isAuthenticated());
-        res.render('addBlogs', data);
+        console.log('----------------------验证-----------------------------')
+        res.redirect('/');
     }
     else{
-        res.redirect('/login');
+        res.render('login', data);
     }
 });
 
 
-router.post('/addBlogs', function(req, res, next) {
-    var mongoose=require('mongoose');
-//创建一个数据库连接
-    var db =mongoose.createConnection('localhost','blog');
-    /*引入blogsSchema配置文件*/
-    var blogsSchemaConf=require('../schema/blogsSchema.js');
-    /*生成一个schema*/
-    var blogSchema  = new mongoose.Schema(blogsSchemaConf);
-    /*根据schema生成模型*/
-    var blogModel = db.model('blog',blogSchema);
-
-    var blogData={
-        blogId:1,
-        title:req.body.blogTitle,
-        imgUrl:req.body.previewImageUrl,
-        author:'ovenslove',
-        intr:req.body.blogIntr,
-        addTime:new Date(),
-        updateTime:new Date(),
-        mark:req.body.markGroup.split(','),
-        content:req.body.blogContent
-    };
-    /*生成一个实体*/
-    var blogEntity= new blogModel(blogData);
-    if(blogEntity.save()){
-        res.send("添加成功");
-    }else {
-        res.send("添加失败");
-    }
-    // res.render('addBlogs',data);
-});
+/*表单提交请求*/
+router.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
 
 module.exports = router;

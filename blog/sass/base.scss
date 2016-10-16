@@ -95,5 +95,71 @@ header{
       float: right;
       line-height:60px;
     }
+    /*login-regist-container*/
+    .login-regist-container{
+      height:100%;
+      width: auto;
+      float: right;
+      vertical-align: middle;
+      line-height:60px;
+        .sim-box{
+          display: inline-block;
+          vertical-align: middle;
+          color: #333333;
+          height:37px;
+          line-height:35px;
+          margin-left: -13px;
+          border-top-right-radius: 18px;
+          border-bottom-right-radius: 18px;
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          &:hover>.i{
+            border-color: #00B7FF;
+          }
+          &:hover>span{
+            background-color: #00B7FF;
+            color: #FFFFFF;
+          }
+          .i{
+            display: block;
+            height:43px;
+            width: 43px;
+            position: absolute;
+            background: transparent;
+            left:-1px;
+            top:calc(50% - 0.5px);
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            -webkit-border-radius:50%;
+            -moz-border-radius:50%;
+            border-radius:50%;
+            border:30px solid #FFFFFF;
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+            z-index:10;
+          }
+          span{
+            background: #FFFFFF;
+            display: inline-block;
+            vertical-align: middle;
+            color: #333333;
+            //background: #FFFFFF;
+            height:37px;
+            line-height:37px;
+            padding: 0 15px 0 10px;
+            margin-left: 21px;
+            border-top-right-radius: 18px;
+            border-bottom-right-radius: 18px;
+            position: relative;
+            z-index:20;
+            font-weight:700;
+          }
+        }
+    }
   }
 }

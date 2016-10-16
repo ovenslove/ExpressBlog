@@ -5,12 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
+/*配置路由*/
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var books = require('./routes/books');
 var blogs = require('./routes/blogs');
 var addBlogs = require('./routes/addBlogs');
+var login = require('./routes/login');
 
+/*定义app*/
 var app = express();
 
 // view engine setup
@@ -26,11 +30,17 @@ app.use(cookieParser());
 /*静态资源*/
 app.use(express.static(path.join(__dirname, 'public')));
 
+/*路由*/
 app.use('/', routes);
 app.use('/', users);
 app.use('/', books);
 app.use('/', blogs);
 app.use('/', addBlogs);
+app.use('/', login);
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
