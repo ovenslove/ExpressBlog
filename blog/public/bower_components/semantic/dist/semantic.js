@@ -7812,7 +7812,7 @@ $.fn.dropdown.settings = {
 
   // property names for remote query
   fields: {
-    remoteValues : 'results',  // grouping for api results
+    remoteValues : 'results',  // grouping for blog results
     values       : 'values',   // grouping for all dropdown values
     disabled     : 'disabled', // whether value should be disabled
     name         : 'name',     // displayed dropdown text
@@ -14179,7 +14179,7 @@ $.fn.search.settings = {
     beginsWith : '(?:\s|^)'
   },
 
-  // maps api response attributes to internal representation
+  // maps blog response attributes to internal representation
   fields: {
     categories      : 'results',     // array of categories (category view)
     categoryName    : 'name',        // name of category (category view)
@@ -18144,7 +18144,7 @@ $.fn.tab.settings = {
   cacheType       : 'response', // Whether to cache exact response, or to html cache contents after scripts execute
   ignoreFirstLoad : false,      // don't load remote content on first load
 
-  apiSettings     : false,      // settings for api call
+  apiSettings     : false,      // settings for blog call
   evaluateScripts : 'once',     // whether inline scripts should be parsed (true/false/once). Once will not re-evaluate on cached content
 
   onFirstLoad : function(tabPath, parameterArray, historyEvent) {}, // called first time loaded
@@ -19876,7 +19876,7 @@ $.api = $.fn.api = function(parameters) {
         create: {
 
           request: function() {
-            // api request promise
+            // blog request promise
             return $.Deferred()
               .always(module.event.request.complete)
               .done(module.event.request.done)
@@ -20412,7 +20412,7 @@ $.api.settings = {
     method            : 'The method you called is not defined',
     missingAction     : 'API action used but no url was defined',
     missingSerialize  : 'jquery-serialize-object is required to add form data to an existing data object',
-    missingURL        : 'No URL specified for api event',
+    missingURL        : 'No URL specified for blog event',
     noReturnedValue   : 'The beforeSend callback must return a settings object, beforeSend ignored.',
     noStorage         : 'Caching responses locally requires session storage',
     parseError        : 'There was an error parsing your request',

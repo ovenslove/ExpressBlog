@@ -3603,7 +3603,7 @@ $.fn.dropdown.settings = {
 
   // property names for remote query
   fields: {
-    remoteValues : 'results',  // grouping for api results
+    remoteValues : 'results',  // grouping for blog results
     values       : 'values',   // grouping for all dropdown values
     disabled     : 'disabled', // whether value should be disabled
     name         : 'name',     // displayed dropdown text

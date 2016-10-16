@@ -239,7 +239,7 @@ $.fn.video = function(parameters) {
             ;
             if(source == 'vimeo') {
               url = ''
-                +      'api='      + api
+                +      'blog='      + api
                 + '&amp;title='    + showUI
                 + '&amp;byline='   + showUI
                 + '&amp;portrait=' + showUI

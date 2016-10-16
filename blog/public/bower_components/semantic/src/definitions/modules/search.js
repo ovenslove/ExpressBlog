@@ -1213,7 +1213,7 @@ $.fn.search.settings = {
     beginsWith : '(?:\s|^)'
   },
 
-  // maps api response attributes to internal representation
+  // maps blog response attributes to internal representation
   fields: {
     categories      : 'results',     // array of categories (category view)
     categoryName    : 'name',        // name of category (category view)
