@@ -5,20 +5,21 @@ var data={
     title:'Login',
     'webSiteName':'ExpressBlog'
 };
+/*
 
-/*-------------------数据库相关----------------------------*/
+/!*-------------------数据库相关----------------------------*!/
 var mongoose=require('mongoose');
 //创建一个数据库连接
 var db =mongoose.createConnection('localhost','blog');
-/*引入Schema配置文件*/
+/!*引入Schema配置文件*!/
 var userSchemaConf=require('../schema/userSchema.js');
-/*生成一个schema*/
+/!*生成一个schema*!/
 var userSchema  = new mongoose.Schema(userSchemaConf);
-/*根据schema生成模型*/
+/!*根据schema生成模型*!/
 var userModel = db.model('user',userSchema);
-/*-------------------数据库相关----------------------------*/
+/!*-------------------数据库相关----------------------------*!/
 
-/*-------------------权限认证相关----------------------------*/
+/!*-------------------权限认证相关----------------------------*!/
 
 
 var passport = require('passport')
@@ -51,7 +52,8 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
     done(null, user);
 });
-/*-------------------权限认证相关----------------------------*/
+/!*-------------------权限认证相关----------------------------*!/
+*/
 
 
 /*正常get请求*/
@@ -73,6 +75,6 @@ router.get('/login', function(req, res, next) {
 
 
 /*表单提交请求*/
-router.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
+// router.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
 
 module.exports = router;
