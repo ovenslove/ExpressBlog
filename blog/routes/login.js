@@ -58,7 +58,8 @@ passport.deserializeUser(function(user, done) {
 
 /*正常get请求*/
 router.get('/login', function(req, res, next) {
-    res.render('login',data);
+    // res.render('login',data);
+    res.send('login');
 });
 
 /*/!*对需要验证后进入的页面t添加这个*!/
