@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var md5 = require('md5');
 /*--------------------------------------------------------*/
 var session = require('express-session');
 /*-------------------数据库相关----------------------------*/
@@ -24,7 +24,9 @@ passport.use(new LocalStrategy(
             if (!user) {
                 return done(null, false, { message: '用户名不存在.' });
             }
-            if (user.password != password) {
+            /*  console.log('----------------------------------'+user.password);
+             console.log('----------------------------------'+md5(password));*/
+            if (user.password != md5(password)) {
                 return done(null, false, { message: '密码不匹配.' });
             }
             return done(null, user);

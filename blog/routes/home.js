@@ -3,10 +3,9 @@ var router = express.Router();
 var session = require('express-session');
 var md5 = require('md5');
 var data={
-    title:'登录',
+    'title':'个人主页',
     'webSiteName':'ExpressBlog'
 };
-
 /*-------------------数据库相关----------------------------*/
 var mongoose=require('mongoose');
 //创建一个数据库连接
@@ -18,13 +17,9 @@ var userSchema  = new mongoose.Schema(userSchemaConf);
 /*根据schema生成模型*/
 var userModel = db.model('user',userSchema);
 /*-------------------数据库相关----------------------------*/
-
 /*-------------------权限认证相关----------------------------*/
-
-
 var passport = require('passport')
     , LocalStrategy = require('passport-local').Strategy;
-
 passport.use(new LocalStrategy(
     function(username, password, done) {
         userModel.findOne({ username: username }, function(err, user) {
@@ -32,8 +27,8 @@ passport.use(new LocalStrategy(
             if (!user) {
                 return done(null, false, { message: '用户名不存在.' });
             }
-          /*  console.log('----------------------------------'+user.password);
-            console.log('----------------------------------'+md5(password));*/
+            /*  console.log('----------------------------------'+user.password);
+             console.log('----------------------------------'+md5(password));*/
             if (user.password != md5(password)) {
                 return done(null, false, { message: '密码不匹配.' });
             }
@@ -41,41 +36,28 @@ passport.use(new LocalStrategy(
         });
     }
 ));
-
 router.use(session({ secret: 'keyboard cat' , resave: false, saveUninitialized: false}));
 router.use(passport.initialize());
 router.use(passport.session());
-
-
 passport.serializeUser(function(user, done) {
     done(null, user);
 });
-
 passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 /*-------------------权限认证相关----------------------------*/
+/*--------------------------------------------------------*/
 
 
-/*正常get请求*/
-/*router.get('/login', function(req, res, next) {
-    res.render('login',data);
-});*/
-
-/*对需要验证后进入的页面t添加这个*/
-router.get('/login', function(req, res, next) {
+router.get('/home', function(req, res, next) {
+    // var sess = req.session.passport || null;
     if(req.isAuthenticated()){
         console.log(req.isAuthenticated());
-        console.log('----------------------验证-----------------------------')
-        res.redirect('/');
+        res.render('home', data);
     }
     else{
-        res.render('login', data);
+        res.redirect('/login');
     }
 });
-
-
-/*表单提交请求*/
-router.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
 
 module.exports = router;

@@ -87,41 +87,48 @@ router.get('/regist', function(req, res){
 
 /*
 *
-* 解决重复注册的问题
-*
-*
-*
-*
 *
 *
 * */
 router.post('/regist', function(req, res, next) {
+    // console.log(req.body.username)
     var password=passwordRound();
-    var user={
-        username:req.body.email,
+    var users={
+        username:req.body.username,
         password:md5(password)
     }
     var ops={
-        to:user.username,
+        to:users.username,
         subject:'Thank you very much for registering this website',
         html:'<h2>Thinks My Friend</h2>' +
         '<p>My friend, your initial password is:</p><span style="font-size: 20px;color: blue; font-weight: 700;">'+password+'</span><br/>' +
         'Please go to the personal home page to change the password after logging in. Thank you.<br/>' +
         '<a href="http://blog.jqstudy.cn" target="_blank">You can click on the link to blogwebsite!</a>'
     }
-    if(registSave(user)){
-        semdEmail(ops);
-        res.redirect('/login');
-    }else {
-        res.send('注册失败');
-    }
+    userModel.findOne({username:users.username},function (err,user) {
+        if (err) { return done(err); }
+        if(!user){
+            if(registSave(users)){
+                    semdEmail(ops);
+                    res.json({
+                        status:1, /*注册成功*/
+                        message:'注册成功'
+                    });
+                 }else {
+                     res.json({
+                         status:2, /*保存失败*/
+                         message:'注册失败'
+                     });
+                 }
+        }else {
+            res.json({
+                status:3, /*保存失败*/
+                message:'用户名已存在'
+            });
+        }
 
-    // res.send(passwordRound());
-
+        console.log(data);
+    });
  });
-
-/*router.get('/regist', function(req, res, next) {
-   res.render('regist',data);
-});*/
 
 module.exports = router;

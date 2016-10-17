@@ -13,6 +13,7 @@
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       vertical-align: middle;
+      margin: 0;
     }
     #submit-btn{
       border-bottom-left-radius: 0;
@@ -34,5 +35,10 @@
     .regist-tips{
       text-align: center;
       margin-top: 100px;
+    }
+    .message-box{
+      width: 57%;
+      margin:10px  auto;
+      display: none;
     }
 }

@@ -126,6 +126,8 @@ $('.ui.checkbox')
 $('.dropdown')
     .dropdown()
 ;
+
+
 /*回到顶部*/
 $(".back2top").on('click',function () {
     $('body').animate({ scrollTop: 0 }, 1000);
@@ -2118,6 +2120,35 @@ $('.ui.checkbox')
 }());
 
 alert("111")
+$(function () {
+   $("#submit-btn").on('click',function () {
+        var username=$("#email-input").val();
+       $.post('/regist',{username:username},function (data) {
+          console.log(data);
+           if(data.status==1){
+               $(".form-box").removeClass('error').addClass('success');
+               $(".message-box").removeClass('error').addClass('success').slideDown(200);
+               $(".message-box .header").html('Thank you very much for your joining!');
+               $(".message-box p").html('Please go to the personal home page to change the password after logging in.');
+               setTimeout(function () {
+                   $(".message-box").slideUp(200);
+                   window.location.href='/login';
+               },3000);
+
+           }
+           if(data.status==3){
+               $(".form-box").removeClass('success').addClass('error');
+               $(".message-box").removeClass('success').addClass('error').slideDown(200);
+               $(".message-box .header").html('E-mail address already exists!');
+               $(".message-box p").html('You need to change a new email or <a href="/login">sign in</a>.');
+               setTimeout(function () {
+                   $(".message-box").slideUp(200);
+               },3000);
+           }
+       });
+       // alert(username);
+   });
+});
 function htmlencode(s){
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(s));
