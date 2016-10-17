@@ -1,0 +1,38 @@
+.regist-container{
+  width: 100%;
+  height:auto;
+  margin:50px auto 20px;
+  padding: 20px;
+  overflow: hidden;
+  text-align: center;
+    h2{
+      margin: 30px;
+    }
+    #email-input{
+      width: 50% ;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      vertical-align: middle;
+    }
+    #submit-btn{
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      background:#eeeeee;
+      border-top:1px solid #dddddd;
+      border-bottom:1px solid #dddddd;
+      border-right:1px solid #dddddd;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      vertical-align: middle;
+      height:37px;
+      &:hover{
+        background: #00B7FF;
+        color: #ffffff;
+      }
+    }
+    .regist-tips{
+      text-align: center;
+      margin-top: 100px;
+    }
+}

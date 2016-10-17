@@ -3,7 +3,7 @@ extends layout/layout
 block content
     link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
     link(rel='stylesheet',type="text/css", href='/css/base.css')
-    link(rel='stylesheet',type="text/css", href='/css/login.css')
+    link(rel='stylesheet',type="text/css", href='/css/regist.css')
     link(rel='stylesheet',type="text/css", href='/bower_components/nprogress/nprogress.css')
     script(src="/bower_components/nprogress/nprogress.js")
     script(src="/bower_components/jquery/dist/jquery.min.js")
@@ -11,5 +11,14 @@ block content
     include layout/header
 
     .main-box
-        h2 注册页面开发中。。。
+        .regist-container
+            h2 Sign Up
+            form.ui.form(method='post',action='/regist')
+                .field.inline
+                    label
+                    input#email-input(type="email",placeholder="xxxx@xxxx.com",name="email")
+                    button.ui.submit.button#submit-btn Send
+            .regist-tips
+                p.tips-word
+                    a(href='/login') Already have an account? Sign in!
     include layout/footer
