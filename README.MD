@@ -1,6 +1,6 @@
 ### 基于Express 和KOA的整站开发
 1. 整站简介
-    > http://www.jqstudy.cn是个人站点，其中包含:
+    > http://www.jqstudy.cn 是个人站点，其中包含:
     
     1. 主站：[http://www.jqstudy.cn](http://www.jqstudy.cn)
     2. 博客站：[http://blog.jqstudy.cn/](http://blog.jqstudy.cn/)
