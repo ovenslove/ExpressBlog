@@ -51,13 +51,23 @@ passport.deserializeUser(function(user, done) {
 
 router.get('/home', function(req, res, next) {
     // var sess = req.session.passport || null;
-    if(req.isAuthenticated()){
+    var sess={
+        "_id" : "58059c6eb7c69b1bd4574324",
+        "username": "1905997838@qq.com"
+    };
+
+
+    res.render('home', data);
+
+
+
+   /* if(req.isAuthenticated()){
         console.log(req.isAuthenticated());
         res.render('home', data);
     }
     else{
         res.redirect('/login');
-    }
+    }*/
 });
 
 module.exports = router;

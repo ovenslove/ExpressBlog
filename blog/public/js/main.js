@@ -126,8 +126,14 @@ $('.ui.checkbox')
 $('.dropdown')
     .dropdown()
 ;
-
-
+$(".side-bar-close-btn ").on('click',function () {
+   $(".side-bar-box").animate({marginLeft:'-150px'},200);
+   $(".side-bar-ico-box").animate({width:'50px'},200);
+});
+$(".side-bar-open-btn ").on('click',function () {
+    $(".side-bar-box").animate({marginLeft:'0px'},200);
+    $(".side-bar-ico-box").animate({width:'0px'},200);
+});
 /*回到顶部*/
 $(".back2top").on('click',function () {
     $('body').animate({ scrollTop: 0 }, 1000);

@@ -1,20 +1,4 @@
-extends layout/layout
+extends layout/homeLayout
 
-block content
-    link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
-    link(rel='stylesheet',type="text/css", href='/css/base.css')
-    link(rel='stylesheet',type="text/css", href='/css/home.css')
-    link(rel='stylesheet',type="text/css", href='/bower_components/nprogress/nprogress.css')
-    script(src="/bower_components/nprogress/nprogress.js")
-    script(src="/bower_components/jquery/dist/jquery.min.js")
-    script(src="/bower_components/semantic/dist/semantic.min.js")
-    script NProgress.start();
-    include layout/header
-
-    .main-box
-        h3 个人主页开发中123456。。。
-
-    include layout/footer
-    script
-        | $(function(){NProgress.done();})
-    script(src="/js/home.js")
+block homecontent
+    p aaa
