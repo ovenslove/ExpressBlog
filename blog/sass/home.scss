@@ -32,6 +32,10 @@
       width: 100%;
       height:auto;
       overflow: hidden;
+      a{
+        display: block;
+        color: inherit;
+      }
       li.list-item{
         display: block;
         height:40px;
@@ -103,6 +107,9 @@
         width: 100%;
         height:auto;
         overflow: hidden;
+        a{
+          color: inherit;
+        }
         li.list-item{
           display: block;
           height:40px;
@@ -143,5 +150,24 @@
     background: #fefefe;
     float: left;
     overflow: auto;
+  }
+}
+
+/*面包屑导航在内*/
+.home-box{
+  padding-left:20px;
+  height:100%;
+  width: 100%;
+  position: relative;
+  overflow: auto;
+  .breadcrumb-nav{
+    height:36px;
+    width: 100%;
+    line-height:36px;
+  }
+  article.article{
+    width: 100%;
+    min-height:calc(100% - 60px);
+    padding: 20px 0;
   }
 }

@@ -2,10 +2,7 @@ var express = require('express');
 var router = express.Router();
 var session = require('express-session');
 var md5 = require('md5');
-var data={
-    'title':'个人主页',
-    'webSiteName':'ExpressBlog'
-};
+
 /*-------------------数据库相关----------------------------*/
 var mongoose=require('mongoose');
 //创建一个数据库连接
@@ -48,26 +45,67 @@ passport.deserializeUser(function(user, done) {
 /*-------------------权限认证相关----------------------------*/
 /*--------------------------------------------------------*/
 
-
+/*主首页*/
 router.get('/home', function(req, res, next) {
+    var data={
+        'title':'个人主页'
+    };
     // var sess = req.session.passport || null;
     var sess={
         "_id" : "58059c6eb7c69b1bd4574324",
         "username": "1905997838@qq.com"
     };
-
-
-    res.render('home', data);
-
-
-
-   /* if(req.isAuthenticated()){
+    // res.render('home', data);
+    if(req.isAuthenticated()){
         console.log(req.isAuthenticated());
         res.render('home', data);
-    }
-    else{
+    }else{
         res.redirect('/login');
-    }*/
+    }
 });
+/*用户信息*/
+router.get('/home/user',function (req, res, next) {
+    var data={
+        'title':'个人信息'
+    };
+    res.render('user', data);
+});
+/*文章列表*/
+router.get('/home/addBlogs',function (req, res, next) {
+    var data={
+        'title':'新建博客'
+    };
+    res.render('addBlogs', data);
+});
+/*文章列表*/
+router.get('/home/blogList',function (req, res, next) {
+    var data={
+        'title':'博客列表'
+    };
+    res.render('blogList', data);
+});
+/*文章分类*/
+router.get('/home/category',function (req, res, next) {
+    var data={
+        'title':'分类列表'
+    };
+    res.render('category', data);
+});
+/*图表信息*/
+router.get('/home/chars',function (req, res, next) {
+    var data={
+        'title':'图表信息'
+    };
+    res.render('chars', data);
+});
+/*垃圾桶*/
+router.get('/home/trush',function (req, res, next) {
+    var data={
+        'title':'回收站'
+    };
+    res.render('trush', data);
+});
+
+
 
 module.exports = router;

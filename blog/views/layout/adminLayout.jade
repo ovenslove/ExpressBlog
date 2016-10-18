@@ -1,0 +1,71 @@
+extends layout
+
+block content
+    link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
+    link(rel='stylesheet',type="text/css", href='/css/base.css')
+    link(rel='stylesheet',type="text/css", href='/css/home.css')
+    link(rel='stylesheet',type="text/css", href='/bower_components/nprogress/nprogress.css')
+    script(src="/bower_components/nprogress/nprogress.js")
+    script(src="/bower_components/jquery/dist/jquery.min.js")
+    script(src="/bower_components/semantic/dist/semantic.min.js")
+    script NProgress.start();
+    //include layout/header
+    .home-container
+        .side-bar-box
+            .side-bar-close-btn
+                i.remove.icon
+            ul.list-group
+                li.list-item
+                    span 首页
+                li.list-item
+                    span 新建文章
+                li.list-item
+                    span 用户信息
+                li.list-item
+                    span 文章列表
+                li.list-item
+                    span 文章分类
+                li.list-item
+                    span 用户管理
+                li.list-item
+                    span 访问数据
+                li.list-item
+                    span 系统配置
+                li.list-item
+                    span 回收站
+            .sign-out-box
+                span 登出
+                i.sign.out.icon
+        .side-bar-ico-box
+            .side-bar-open-btn
+                i.content.icon
+            ul.list-group
+                li.list-item
+                    i.home.icon
+                li.list-item
+                    i.user.icon
+                li.list-item
+                    i.write.square.icon
+                li.list-item
+                    i.list.layout.icon
+                li.list-item
+                    i.grid.layout.icon
+                li.list-item
+                    i.users.icon
+                li.list-item
+                    i.line.chart.icon
+                li.list-item
+                    i.options.icon
+                li.list-item
+                    i.trash.outline.icon
+            .sign-out-box
+                i.sign.out.icon
+
+
+        .pull-top
+        .home-show-box
+            block homecontent
+    //include layout/footer
+    script
+        | $(function(){NProgress.done();})
+    script(src="/js/home.js")

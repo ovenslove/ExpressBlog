@@ -1,4 +1,11 @@
 extends layout/homeLayout
 
 block homecontent
-    p aaa
+    .home-box
+        .ui.breadcrumb.breadcrumb-nav
+            a(href="/").section MainPage
+            .divider  /
+            .active.section Home
+        article.article
+            - for (var i = 0; i < 10; ++i)
+                p=i

@@ -1,15 +1,9 @@
-extends layout/layout
+extends layout/homeLayout
 
-block content
-    link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
+block homecontent
     link(rel='stylesheet',type="text/css", href='/css/wangEditor.css')
     link(rel='stylesheet',type="text/css", href='/css/base.css')
     link(rel='stylesheet',type="text/css", href='/css/blogEdit.css')
-    link(rel='stylesheet',type="text/css", href='/bower_components/nprogress/nprogress.css')
-    script(src="/bower_components/nprogress/nprogress.js")
-    script(src="/bower_components/jquery/dist/jquery.min.js")
-    script(src="/bower_components/semantic/dist/semantic.min.js")
-    include layout/header
 
     .main-box
         form.ui.form(method="post",action="/addBlogs")
@@ -52,9 +46,6 @@ block content
                 | SUBMIT
 
         div.editor-markdown-container
-
-
-    include layout/footer
 
     script(src="/js/wangEditor.js")
     script(src="/js/blogEdit.js")

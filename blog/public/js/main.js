@@ -126,6 +126,7 @@ $('.ui.checkbox')
 $('.dropdown')
     .dropdown()
 ;
+
 $(".side-bar-close-btn ").on('click',function () {
    $(".side-bar-box").animate({marginLeft:'-150px'},200);
    $(".side-bar-ico-box").animate({width:'50px'},200);

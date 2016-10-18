@@ -52,7 +52,7 @@ var data={
     'webSiteName':'ExpressBlog'
 };
 
-router.get('/addBlogs', function(req, res, next) {
+/*router.get('/addBlogs', function(req, res, next) {
     if(req.isAuthenticated()){
         console.log(req.isAuthenticated());
         res.render('addBlogs', data);
@@ -60,7 +60,7 @@ router.get('/addBlogs', function(req, res, next) {
     else{
         res.redirect('/login');
     }
-});
+});*/
 
 
 router.post('/addBlogs', function(req, res, next) {
@@ -88,7 +88,7 @@ router.post('/addBlogs', function(req, res, next) {
     /*生成一个实体*/
     var blogEntity= new blogModel(blogData);
     if(blogEntity.save()){
-        res.send("添加成功");
+            res.redirect('/home');
     }else {
         res.send("添加失败");
     }

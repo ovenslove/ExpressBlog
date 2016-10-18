@@ -9,26 +9,32 @@ block content
     script(src="/bower_components/jquery/dist/jquery.min.js")
     script(src="/bower_components/semantic/dist/semantic.min.js")
     script NProgress.start();
-    //include layout/header
     .home-container
         .side-bar-box
             .side-bar-close-btn
                 i.remove.icon
             ul.list-group
-                li.list-item
-                    span 新建文章
-                li.list-item
-                    span 文章列表
-                li.list-item
-                    span 文章分类
-                li.list-item
-                    span 用户管理
-                li.list-item
-                    span 访问数据
-                li.list-item
-                    span 系统配置
-                li.list-item
-                    span 回收站
+                a(href="/")
+                    li.list-item
+                        span 首页
+                a(href="/home/user")
+                    li.list-item
+                        span 用户信息
+                a(href="/home/addBlogs")
+                    li.list-item
+                        span 新建文章
+                a(href="/home/blogList")
+                    li.list-item
+                        span 文章列表
+                a(href="/home/category")
+                    li.list-item
+                        span 文章分类
+                a(href="/home/chars")
+                    li.list-item
+                        span 访问数据
+                a(href="/home/trush")
+                    li.list-item
+                        span 回收站
             .sign-out-box
                 span 登出
                 i.sign.out.icon
@@ -36,20 +42,27 @@ block content
             .side-bar-open-btn
                 i.content.icon
             ul.list-group
-                li.list-item
-                    i.write.square.icon
-                li.list-item
-                    i.list.layout.icon
-                li.list-item
-                    i.grid.layout.icon
-                li.list-item
-                    i.users.icon
-                li.list-item
-                    i.line.chart.icon
-                li.list-item
-                    i.options.icon
-                li.list-item
-                    i.trash.outline.icon
+                a(href="/home")
+                    li.list-item
+                        i.home.icon
+                a(href="/home/user")
+                    li.list-item
+                        i.user.icon
+                a(href="/home/addBlogs")
+                    li.list-item
+                        i.write.square.icon
+                a(href="/home/blogList")
+                    li.list-item
+                        i.list.layout.icon
+                a(href="/home/category")
+                    li.list-item
+                        i.grid.layout.icon
+                a(href="/home/chars")
+                    li.list-item
+                        i.line.chart.icon
+                a(href="/home/trush")
+                    li.list-item
+                        i.trash.outline.icon
             .sign-out-box
                 i.sign.out.icon
 
@@ -57,7 +70,6 @@ block content
         .pull-top
         .home-show-box
             block homecontent
-    //include layout/footer
     script
         | $(function(){NProgress.done();})
     script(src="/js/home.js")

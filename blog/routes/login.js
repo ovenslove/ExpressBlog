@@ -67,7 +67,7 @@ router.get('/login', function(req, res, next) {
     if(req.isAuthenticated()){
         console.log(req.isAuthenticated());
         console.log('----------------------验证-----------------------------')
-        res.redirect('/');
+        res.redirect('/home');
     }
     else{
         res.render('login', data);
@@ -76,6 +76,6 @@ router.get('/login', function(req, res, next) {
 
 
 /*表单提交请求*/
-router.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
+router.post('/login', passport.authenticate('local', { successRedirect: '/home', failureRedirect: '/login' }));
 
 module.exports = router;
