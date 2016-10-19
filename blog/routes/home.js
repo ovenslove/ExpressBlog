@@ -13,6 +13,14 @@ var userSchemaConf=require('../schema/userSchema.js');
 var userSchema  = new mongoose.Schema(userSchemaConf);
 /*根据schema生成模型*/
 var userModel = db.model('user',userSchema);
+
+/*blog*/
+/*引入blogsSchema配置文件*/
+var blogsSchemaConf=require('../schema/blogsSchema.js');
+/*生成一个schema*/
+var blogSchema  = new mongoose.Schema(blogsSchemaConf);
+/*根据schema生成模型*/
+var blogModel = db.model('blog',blogSchema);
 /*-------------------数据库相关----------------------------*/
 /*-------------------权限认证相关----------------------------*/
 var passport = require('passport')
@@ -82,7 +90,14 @@ router.get('/home/blogList',function (req, res, next) {
     var data={
         'title':'博客列表'
     };
-    res.render('blogList', data);
+    blogModel.find({}).sort({'addTime':-1}).limit(10).skip(0).exec(function(err,blogs){
+        data.list=blogs;
+        // res.send(data);
+        res.render('blogList', data);
+    });
+
+
+    // res.render('blogList', data);
 });
 /*文章分类*/
 router.get('/home/category',function (req, res, next) {

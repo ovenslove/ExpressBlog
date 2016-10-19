@@ -1,4 +1,39 @@
 extends layout/homeLayout
 
 block homecontent
-    p 文章列表
+    .home-box
+        .ui.breadcrumb.breadcrumb-nav
+            a(href="/").section MainPage
+            .divider  /
+            .active.section Home
+        article.article
+            h2 文章列表
+            table.ui.celled.table.selectable
+                thead
+                    tr
+                        th ##
+                        th ##
+                        th 照片
+                        th 标题
+                        th 简介
+                        th 标签
+                        th 时间
+                        th 作者
+                        th 操作
+                tbody
+                    each  val,key in list
+                        tr
+                            td.field(style="width:60px;")
+                                .ui.checkbox
+                                    input.hidden(type='checkbox', tabindex='0')
+                            td(style="width:220px;") #{val._id}
+                            td(style="width:60px;")
+                                img(src=val.imgUrl,style="max-height:30px;width:auto;")
+                            td
+                                a.header(href=" /blogs/#{val._id}" ) #{val.title}
+                            td #{val.intr}
+                            td #{val.mark.join()}
+                            td #{new Date(val.addTime).toLocaleString()}
+                            td #{val.author}
+                            td.selectable
+                                a(href='#') Edit

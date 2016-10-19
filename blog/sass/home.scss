@@ -155,7 +155,7 @@
 
 /*面包屑导航在内*/
 .home-box{
-  padding-left:20px;
+  padding:0px;
   height:100%;
   width: 100%;
   position: relative;
@@ -164,10 +164,11 @@
     height:36px;
     width: 100%;
     line-height:36px;
+    padding: 0 20px;
   }
   article.article{
     width: 100%;
     min-height:calc(100% - 60px);
-    padding: 20px 0;
+    padding: 20px;
   }
 }
