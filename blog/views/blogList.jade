@@ -5,35 +5,47 @@ block homecontent
         .ui.breadcrumb.breadcrumb-nav
             a(href="/").section MainPage
             .divider  /
-            .active.section Home
+            a(href="/home").section home
+                .divider  /
+            .active.section BlogList
         article.article
-            h2 文章列表
+            h2 Blog List
             table.ui.celled.table.selectable
                 thead
                     tr
-                        th ##
-                        th ##
-                        th 照片
-                        th 标题
-                        th 简介
-                        th 标签
-                        th 时间
-                        th 作者
-                        th 操作
+                        th ID
+                        th Preview
+                        th Title
+                        th Introduce
+                        th Mark
+                        th AddTime
+                        th opts
                 tbody
                     each  val,key in list
                         tr
-                            td.field(style="width:60px;")
-                                .ui.checkbox
-                                    input.hidden(type='checkbox', tabindex='0')
                             td(style="width:220px;") #{val._id}
                             td(style="width:60px;")
                                 img(src=val.imgUrl,style="max-height:30px;width:auto;")
-                            td
+                            td(style="max-width:200px;")
                                 a.header(href=" /blogs/#{val._id}" ) #{val.title}
-                            td #{val.intr}
+                            td(style="max-width:300px;") #{val.intr}
                             td #{val.mark.join()}
                             td #{new Date(val.addTime).toLocaleString()}
-                            td #{val.author}
-                            td.selectable
-                                a(href='#') Edit
+                            td(style="width:20px;text-align:center;")
+                                .ui.right.pointing.dropdown.icon.button
+                                    i.settings.icon
+                                    .menu
+                                        .header
+                                            i.cubes.icon
+                                            |  operation
+                                        .item
+                                            .ui.red.empty.circular.label
+                                            | Edit
+                                        .item
+                                            .ui.blue.empty.circular.label
+                                            | Delete
+                                        .item
+                                            .ui.black.empty.circular.label
+                                            | Stop
+
+    script(src="/js/blogList.js")

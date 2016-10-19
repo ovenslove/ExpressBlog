@@ -1,0 +1,158 @@
+
+.user-sim-panle{
+  width: 100%;
+  min-height:200px;
+  border:1px solid #dddddd;
+  -webkit-border-radius:6px;
+  -moz-border-radius:6px;
+  border-radius:6px;
+  position: relative;
+  margin: 40px auto 20px;
+  .user-sim-title{
+    display: block;
+    position: absolute;
+    top:-15px;
+    left:30px;
+    height:30px;
+    line-height:30px;
+    background: #FFFFFF;
+    padding: 0 10px ;
+    font-weight: 700;
+    border:1px solid #dddddd;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+  }
+  .user-sim-box{
+    min-height:40px;
+    width: 100%;
+    line-height:40px;
+    margin: 20px auto;
+    label{
+      width: 200px;
+      height:100%;
+      display: inline-block;
+      text-align: right;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      padding: 0 20px;
+      font-size:16px;
+      font-weight:700;
+      color: #666666;
+    }
+    input{
+      height:30px;
+      display: inline-block;
+      width: 400px;
+      background: transparent;
+      border:1px solid #cccccc;
+      padding: 0 10px;
+      color: #333333;
+    }
+    input[disabled]{
+      background: #eeeeee;
+    }
+    span.exchangePassword{
+      display: inline-block;
+      height:30px;
+      width: auto;
+      //background: red;
+      line-height:30px;
+      text-align: center;
+      margin: 0 10px;
+      padding: 0 10px;
+      -webkit-border-radius:4px;
+      -moz-border-radius:4px;
+      border-radius:4px;
+      border:1px solid #dddddd;
+      cursor: pointer;
+      &:hover{
+        background: #00CC66;
+        color: #FFFFFF;
+      }
+    }
+    .exchangePassword-box{
+      display: none;
+      width: 400px;
+      height:auto;
+      margin-left: 200px;
+      padding: 20px;
+      border: 1px solid #dddddd;
+      position: relative;
+      .close-btn{
+        position: absolute;
+        right:5px;
+        top:5px;
+        font-size:24px;
+        height:24px;
+        width: 24px;
+        line-height:24px;
+      }
+      .user-password-sim-box{
+        height:40px;
+        width: 100%;
+        line-height:40px;
+        margin: 10px auto;
+        label{
+          width: 130px;
+          height:100%;
+          display: inline-block;
+          text-align: right;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+          padding: 0 20px;
+          font-size:16px;
+          font-weight:700;
+          color: #666666;
+        }
+        input{
+          height:30px;
+          display: inline-block;
+          width: 200px;
+          background: transparent;
+          border:1px solid #cccccc;
+          padding: 0 10px;
+          color: #333333;
+        }
+        #verifiCode{
+          width: 100px;
+          display: inline-block;
+          text-align: center;
+          cursor: pointer;
+        }
+        #verifiCodeInput{
+          width: 100px;
+        }
+        #exchangePassword-cimmit-btn{
+          width: 160px;
+          height:30px;
+          background: #00CC66;
+          margin: auto;
+          line-height:30px;
+          text-align: center;
+          color: #FFFFFF;
+          -webkit-border-radius:4px;
+          -moz-border-radius:4px;
+          border-radius:4px;
+          cursor: pointer;
+        }
+      }
+    }
+    #userLogoPreview{
+      display: none;
+      width: 260px;
+      height:auto;
+      background: transparent;
+      margin-left: 270px;
+      border:1px solid #dddddd;
+      background-size: cover;
+        img{
+          width: 100%;
+          height:auto;
+          display: block;
+        }
+    }
+  }
+}

@@ -1,4 +1,62 @@
 extends layout/homeLayout
 
 block homecontent
-    p 用户信息
+    link(rel='stylesheet',type="text/css", href='/css/user.css')
+    .home-box
+        .ui.breadcrumb.breadcrumb-nav
+            a(href="/").section MainPage
+                .divider  /
+                a(href="/home").section home
+                    .divider  /
+                .active.section User
+        article.article
+            h2 User Information
+            .user-sim-panle
+                .user-sim-title BaseInformation
+                .user-sim-box
+                    label UserName:
+                    input(type="text",disabled,value='1905997838@qq.com')
+                .user-sim-box
+                    label UserPassword:
+                    input(type="password",disabled,value='1905997838@qq.com')
+                    span.exchangePassword 修改密码
+                    .exchangePassword-box
+                        i.remove.icon.close-btn
+                        .user-password-sim-box
+                            label 旧密码
+                            input(type='password')
+                        .user-password-sim-box
+                            label 新密码
+                            input(type='password')
+                        .user-password-sim-box
+                            label 确认新密码
+                            input(type='password')
+                        .user-password-sim-box
+                            label 验证码
+                            span#verifiCode 3+11=?
+                            input(type='password')#verifiCodeInput
+                        .user-password-sim-box
+                            #exchangePassword-cimmit-btn 确认修改
+                .user-sim-box
+                    label UserLogo:
+                    input#userLogoPreview-input(type="url",placeholder='Pictures of URL from the Internet')
+                    #userLogoPreview
+                        img#userlogo-img
+            .user-sim-panle
+                .user-sim-title ExtraInformation
+                .user-sim-box
+                    label Sex:
+                    select.ui.dropdown
+                        option(value='') Gender
+                        option(value='1') Male
+                        option(value='0') Female
+                .user-sim-box
+                    label Age:
+                    input(type="number",min='16',max='60',value='18')
+                .user-sim-box
+                    label Hobbit:
+                    input(type="text",placeholder="What do you like to do?")
+
+
+
+    script(src="/js/user.js")

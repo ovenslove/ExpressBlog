@@ -127,6 +127,10 @@ $('.dropdown')
     .dropdown()
 ;
 
+$('.ui.checkbox')
+    .checkbox()
+;
+$(".ui.right.pointing").dropdown();
 $(".side-bar-close-btn ").on('click',function () {
    $(".side-bar-box").animate({marginLeft:'-150px'},200);
    $(".side-bar-ico-box").animate({width:'50px'},200);
@@ -2130,31 +2134,52 @@ alert("111")
 $(function () {
    $("#submit-btn").on('click',function () {
         var username=$("#email-input").val();
-       $.post('/regist',{username:username},function (data) {
-          console.log(data);
-           if(data.status==1){
-               $(".form-box").removeClass('error').addClass('success');
-               $(".message-box").removeClass('error').addClass('success').slideDown(200);
-               $(".message-box .header").html('Thank you very much for your joining!');
-               $(".message-box p").html('Please go to the personal home page to change the password after logging in.');
-               setTimeout(function () {
-                   $(".message-box").slideUp(200);
-                   window.location.href='/login';
-               },3000);
+       if(username!='' && /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test(username) ){
+           $.post('/regist',{username:username},function (data) {
+              console.log(data);
+               if(data.status==1){
+                   $(".form-box").removeClass('error').addClass('success');
+                   $(".message-box").removeClass('error').addClass('success').slideDown(200);
+                   $(".message-box .header").html('Thank you very much for your joining!');
+                   $(".message-box p").html('Please go to the personal home page to change the password after logging in.');
+                   setTimeout(function () {
+                       $(".message-box").slideUp(200);
+                       window.location.href='/login';
+                   },3000);
 
-           }
-           if(data.status==3){
-               $(".form-box").removeClass('success').addClass('error');
-               $(".message-box").removeClass('success').addClass('error').slideDown(200);
-               $(".message-box .header").html('E-mail address already exists!');
-               $(".message-box p").html('You need to change a new email or <a href="/login">sign in</a>.');
-               setTimeout(function () {
-                   $(".message-box").slideUp(200);
-               },3000);
-           }
-       });
+               }
+               if(data.status==3){
+                   $(".form-box").removeClass('success').addClass('error');
+                   $(".message-box").removeClass('success').addClass('error').slideDown(200);
+                   $(".message-box .header").html('E-mail address already exists!');
+                   $(".message-box p").html('You need to change a new email or <a href="/login">sign in</a>.');
+                   setTimeout(function () {
+                       $(".message-box").slideUp(200);
+                   },3000);
+               }
+           })
+       }else {
+           alert("邮箱格式不正确！")
+       }
        // alert(username);
    });
+
+    $('.ui.form')
+        .form({
+            on: 'blur',
+            fields: {
+                email: {
+                    identifier  : 'email',
+                    rules: [
+                        {
+                            type   : 'email',
+                            prompt : 'Please enter a valid e-mail'
+                        }
+                    ]
+                }
+            }
+        })
+    ;
 });
 function htmlencode(s){
     var div = document.createElement('div');
@@ -2170,6 +2195,56 @@ window.onload=function () {
     $(".content").html(htmldecode( $(".content-area").html()));
 
 };
+$(function () {
+    var verifiCodeNum;
+    function getNum() {
+        var str='';
+        var wayarr=['+','-','*','/']
+        var rand1=Math.floor((Math.random()*30)+2);
+        var rand2=Math.floor((Math.random()*30)+2);
+        var randway=wayarr[Math.floor((Math.random()*4))];
+        if(randway=='+'){
+             str=rand1 +'+'+rand2+'=?';
+            verifiCodeNum=rand1+rand2;
+        }
+        if(randway=='-'){
+            if(rand1>=rand2){
+                 str=rand1 +'-'+rand2+'=?';
+                verifiCodeNum=rand1-rand2;
+            }else {
+                 str=rand2 +'-'+rand1+'=?';
+                verifiCodeNum=rand2-rand1;
+            }
+        }
+        if(randway=='*'){
+             str=rand1 +'*'+rand2+'=?';
+            verifiCodeNum=rand1*rand2;
+        }
+        if(randway=='/'){
+             str=(rand1*rand2) +'/'+rand2+'=?';
+            verifiCodeNum=rand1;
+        }
+        return str;
+    }
+    $(".exchangePassword").on('click',function () {
+        $(".exchangePassword-box").slideDown(200);
+    }) ;
+    $("#verifiCode").on('click',function () {
+        $("#verifiCode").text(getNum());
+    });
+   $(".exchangePassword-box .close-btn").on('click',function () {
+       $(".exchangePassword-box").slideUp(200);
+   }) ;
+
+    $("#userLogoPreview-input").on('blur',function () {
+       var val=$(this).val();
+        $("#userLogoPreview>img").attr('src',val);
+        $("#userlogo-img")[0].onload = function() {
+            $("#userLogoPreview").slideDown(200);
+        }
+    });
+
+});
 (function (factory) {
     if (typeof window.define === 'function') {
         if (window.define.amd) {
