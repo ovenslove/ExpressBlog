@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var md5 = require('md5');
+
 /*--------------------------------------------------------*/
 var session = require('express-session');
 /*-------------------数据库相关----------------------------*/
@@ -45,23 +46,13 @@ passport.deserializeUser(function(user, done) {
 /*-------------------权限认证相关----------------------------*/
 /*--------------------------------------------------------*/
 
-
-/* GET books listing. */
-var data={
-   title:'新增博文',
-    'webSiteName':'ExpressBlog'
-};
-
-/*router.get('/addBlogs', function(req, res, next) {
-    if(req.isAuthenticated()){
-        console.log(req.isAuthenticated());
-        res.render('addBlogs', data);
-    }
-    else{
-        res.redirect('/login');
-    }
-});*/
-
+/*文章列表*/
+router.get('/home/addBlogs',function (req, res, next) {
+    var data={
+        'title':'新建博客'
+    };
+    res.render('addBlogs', data);
+});
 
 router.post('/addBlogs', function(req, res, next) {
     var mongoose=require('mongoose');

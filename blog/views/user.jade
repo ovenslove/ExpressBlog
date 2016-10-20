@@ -10,52 +10,67 @@ block homecontent
                     .divider  /
                 .active.section User
         article.article
-            h2 User Information
-            .user-sim-panle
-                .user-sim-title BaseInformation
-                .user-sim-box
-                    label UserName:
-                    input(type="text",disabled,value='1905997838@qq.com')
-                .user-sim-box
-                    label UserPassword:
-                    input(type="password",disabled,value='1905997838@qq.com')
-                    span.exchangePassword 修改密码
-                    .exchangePassword-box
-                        i.remove.icon.close-btn
-                        .user-password-sim-box
-                            label 旧密码
-                            input(type='password')
-                        .user-password-sim-box
-                            label 新密码
-                            input(type='password')
-                        .user-password-sim-box
-                            label 确认新密码
-                            input(type='password')
-                        .user-password-sim-box
-                            label 验证码
-                            span#verifiCode 3+11=?
-                            input(type='password')#verifiCodeInput
-                        .user-password-sim-box
-                            #exchangePassword-cimmit-btn 确认修改
-                .user-sim-box
-                    label UserLogo:
-                    input#userLogoPreview-input(type="url",placeholder='Pictures of URL from the Internet')
-                    #userLogoPreview
-                        img#userlogo-img
-            .user-sim-panle
-                .user-sim-title ExtraInformation
-                .user-sim-box
-                    label Sex:
-                    select.ui.dropdown
-                        option(value='') Gender
-                        option(value='1') Male
-                        option(value='0') Female
-                .user-sim-box
-                    label Age:
-                    input(type="number",min='16',max='60',value='18')
-                .user-sim-box
-                    label Hobbit:
-                    input(type="text",placeholder="What do you like to do?")
+            .user-main-box
+                h2 User Information
+                .user-sim-panle
+                    .user-sim-title BaseInformation
+                    .user-sim-box
+                        label UserName:
+                        input(type="text",disabled,value='1905997838@qq.com')
+                    .user-sim-box
+                        label UserPassword:
+                        input(type="password",disabled,value='1905997838@qq.com')
+                        span.exchangePassword Edit
+                        .exchangePassword-box
+                            i.remove.icon.close-btn
+                            .user-password-sim-box
+                                label Old Password:
+                                input(type='password')
+                            .user-password-sim-box
+                                label New Password:
+                                input(type='password')
+                            .user-password-sim-box
+                                label New Password:
+                                input(type='password')
+                            .user-password-sim-box
+                                label VerifiCode:
+                                span#verifiCode 3+11=?
+                                input(type='password')#verifiCodeInput
+                            .user-password-sim-box
+                                #exchangePassword-cimmit-btn Submit
+                    .user-sim-box
+                        label UserLogo:
+                        input#userLogoPreview-input(type="url",placeholder='Pictures of URL from the Internet')
+                        #userLogoPreview
+                            img#userlogo-img
+                    .user-sim-box
+                        label Telephone:
+                        input(type="tel",placeholder="What's your telephone number?")
+                .user-sim-panle
+                    .user-sim-title ExtraInformation
+                    .user-sim-box
+                        label Sex:
+                        select.ui.dropdown(style="height:30px;line-height:30px;")
+                            option(value='') Gender
+                            option(value='1') Male
+                            option(value='0') Female
+                    .user-sim-box
+                        label Age:
+                        input(type="number",min='16',max='60',value='18')
+                    .user-sim-box
+                        label Education:
+                        input(type="text",placeholder="which university are you in?")
+                    .user-sim-box
+                        label Occupation:
+                        input(type="text",placeholder="What's your occupation?")
+                    .user-sim-box
+                        label Hobbit:
+                        input(type="text",placeholder="What do you like to do?")
+                    .user-sim-box
+                        label(style="vertical-align:top;") Introduce:
+                        textarea(placeholder="introduce yourself!")
+                .user-info-submit submit
+
 
 
 

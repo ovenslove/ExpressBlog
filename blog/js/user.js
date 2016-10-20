@@ -42,6 +42,7 @@ $(function () {
     $("#userLogoPreview-input").on('blur',function () {
        var val=$(this).val();
         $("#userLogoPreview>img").attr('src',val);
+        // $("#userlogo-img").slideUp();
         $("#userlogo-img")[0].onload = function() {
             $("#userLogoPreview").slideDown(200);
         }

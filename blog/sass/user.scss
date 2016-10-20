@@ -1,4 +1,6 @@
-
+.user-main-box{
+  width: 100%;
+}
 .user-sim-panle{
   width: 100%;
   min-height:200px;
@@ -50,6 +52,12 @@
       padding: 0 10px;
       color: #333333;
     }
+    textarea{
+      width: 400px;
+      height:100px;
+      border:1px solid #dddddd;
+      padding: 5px;
+    }
     input[disabled]{
       background: #eeeeee;
     }
@@ -74,11 +82,11 @@
     }
     .exchangePassword-box{
       display: none;
-      width: 400px;
+      width: 590px;
       height:auto;
-      margin-left: 200px;
+      margin-left: 10px;
       padding: 20px;
-      border: 1px solid #dddddd;
+      border: 1px dashed #dddddd;
       position: relative;
       .close-btn{
         position: absolute;
@@ -95,7 +103,7 @@
         line-height:40px;
         margin: 10px auto;
         label{
-          width: 130px;
+          width: 170px;
           height:100%;
           display: inline-block;
           text-align: right;
@@ -110,20 +118,20 @@
         input{
           height:30px;
           display: inline-block;
-          width: 200px;
+          width: 350px;
           background: transparent;
           border:1px solid #cccccc;
           padding: 0 10px;
           color: #333333;
         }
         #verifiCode{
-          width: 100px;
+          width: 200px;
           display: inline-block;
           text-align: center;
           cursor: pointer;
         }
         #verifiCodeInput{
-          width: 100px;
+          width: 150px;
         }
         #exchangePassword-cimmit-btn{
           width: 160px;
@@ -155,4 +163,16 @@
         }
     }
   }
+}
+
+.user-info-submit{
+  height:30px;
+  width: 200px;
+  background: #00CC66;
+  border-radius: 4px;
+  text-align: center;
+  line-height:30px;
+  color: #FFFFFF;
+  font-weight: 700;
+  margin-left: 200px;
 }

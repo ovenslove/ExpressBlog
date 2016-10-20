@@ -71,20 +71,8 @@ router.get('/home', function(req, res, next) {
         res.redirect('/login');
     }
 });
-/*用户信息*/
-router.get('/home/user',function (req, res, next) {
-    var data={
-        'title':'个人信息'
-    };
-    res.render('user', data);
-});
-/*文章列表*/
-router.get('/home/addBlogs',function (req, res, next) {
-    var data={
-        'title':'新建博客'
-    };
-    res.render('addBlogs', data);
-});
+
+
 /*文章列表*/
 router.get('/home/blogList',function (req, res, next) {
     var data={
