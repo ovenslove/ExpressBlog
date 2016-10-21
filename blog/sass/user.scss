@@ -121,6 +121,7 @@
         width: 100%;
         line-height:40px;
         margin: 10px auto;
+        position: relative;
         label{
           width: 170px;
           height:100%;
@@ -142,6 +143,52 @@
           border:1px solid #cccccc;
           padding: 0 10px;
           color: #333333;
+          outline:none;
+        }
+        input.error{
+          color: #ff0000;
+          border-color: #ff0000;
+        }
+        input.success{
+          color: green;
+          border-color: green;
+        }
+        /*密码复杂度条*/
+        .password-complexity-box{
+          display: block;
+          position: absolute;
+          bottom:-2px;
+          height: 5px;
+          width: 350px;
+          //background: red;
+          margin-left: 170px;
+            span{
+              display: block;
+              height:5px;
+              width: calc((100% - 9px)/4);
+              float: left;
+              border:1px solid #dddddd;
+              &:not(:last-child){
+                margin-right:3px;
+              }
+              &:nth-child(1).active{
+                background: red;
+              }
+              &:nth-child(2).active{
+                background: orange;
+              }
+              &:nth-child(3).active{
+                background: yellowgreen;
+              }
+              &:nth-child(4).active{
+                background: green;
+              }
+            }
+        }
+        i.psd-show{
+          line-height: 15px;
+          margin-left: -25px;
+          cursor: pointer;
         }
         #verifiCode{
           width: 200px;
@@ -155,7 +202,7 @@
         #exchangePassword-cimmit-btn{
           width: 160px;
           height:30px;
-          background: #00CC66;
+          background: #cccccc;
           margin: auto;
           line-height:30px;
           text-align: center;
@@ -164,6 +211,9 @@
           -moz-border-radius:4px;
           border-radius:4px;
           cursor: pointer;
+        }
+        #exchangePassword-cimmit-btn.commit-active{
+          background: #00CC66;
         }
       }
     }
