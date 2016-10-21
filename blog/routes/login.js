@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var md5 = require('md5');
 var data={
@@ -77,5 +78,4 @@ router.get('/login', function(req, res, next) {
 
 /*表单提交请求*/
 router.post('/login', passport.authenticate('local', { successRedirect: '/home', failureRedirect: '/login' }));
-
 module.exports = router;

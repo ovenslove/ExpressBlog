@@ -23,20 +23,33 @@ block homecontent
                         input(type="password",disabled,value='1905997838@qq.com')
                         span.exchangePassword Edit
                         .exchangePassword-box
-                            i.remove.icon.close-btn
+                            //i.remove.icon.close-btn
                             .user-password-sim-box
                                 label Old Password:
-                                input(type='password')
+                                input.old-psd(type='password')
+                                i.unhide.icon.psd-show
                             .user-password-sim-box
                                 label New Password:
-                                input(type='password')
+                                input.new-psd1(type='password')
+                                i.unhide.icon.psd-show
+                                p.password-complexity-box.complexity1
+                                    span
+                                    span
+                                    span
+                                    span
                             .user-password-sim-box
                                 label New Password:
-                                input(type='password')
+                                input.new-psd2(type='password')
+                                i.unhide.icon.psd-show
+                                p.password-complexity-box.complexity2
+                                    span
+                                    span
+                                    span
+                                    span
                             .user-password-sim-box
                                 label VerifiCode:
                                 span#verifiCode 3+11=?
-                                input(type='password')#verifiCodeInput
+                                input(type='text')#verifiCodeInput
                             .user-password-sim-box
                                 #exchangePassword-cimmit-btn Submit
                     .user-sim-box
