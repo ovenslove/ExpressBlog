@@ -2227,7 +2227,12 @@ $(function () {
         return str;
     }
     $(".exchangePassword").on('click',function () {
-        $(".exchangePassword-box").slideDown(200);
+        $(".exchangePassword-box").slideToggle(200);
+    }) ;
+    $(".exchangeLogo").on('click',function () {
+        $("#userLogoPreview-show").slideToggle(200);
+        $("#userLogoPreview-container").slideToggle(200);
+
     }) ;
     $("#verifiCode").on('click',function () {
         $("#verifiCode").text(getNum());
@@ -2244,7 +2249,21 @@ $(function () {
             $("#userLogoPreview").slideDown(200);
         }
     });
-
+    var $image = $('#userlogo-img');
+    $image.cropper({
+        aspectRatio: 16 / 16,
+        preview:".userlogo-preview",
+        crop: function(e) {
+            // Output the result data for cropping image.
+            console.log(e.x);
+            console.log(e.y);
+            console.log(e.width);
+            console.log(e.height);
+            console.log(e.rotate);
+            console.log(e.scaleX);
+            console.log(e.scaleY);
+        }
+    });
 });
 (function (factory) {
     if (typeof window.define === 'function') {

@@ -2,6 +2,7 @@ extends layout/homeLayout
 
 block homecontent
     link(rel='stylesheet',type="text/css", href='/css/user.css')
+    link(rel='stylesheet',type="text/css", href='/bower_components/cropper/dist/cropper.min.css')
     .home-box
         .ui.breadcrumb.breadcrumb-nav
             a(href="/").section MainPage
@@ -40,9 +41,18 @@ block homecontent
                                 #exchangePassword-cimmit-btn Submit
                     .user-sim-box
                         label UserLogo:
-                        input#userLogoPreview-input(type="url",placeholder='Pictures of URL from the Internet')
-                        #userLogoPreview
-                            img#userlogo-img
+                        #userLogoPreview-show-container
+                            img#userLogoPreview-show(src="/images/sim-img.jpg")
+                        span.exchangeLogo Edit
+                        #userLogoPreview-container.clearfix
+                            #userLogoPreview
+                                img#userlogo-img(src="/images/sim-img.jpg")
+                            .userlogo-preview-box
+                                .userlogo-preview.lg
+                                .userlogo-preview.mid
+                                .userlogo-preview.small
+                                .put-image-data-btn 选择文件
+                                .get-image-data-btn 确定
                     .user-sim-box
                         label Telephone:
                         input(type="tel",placeholder="What's your telephone number?")
@@ -73,5 +83,5 @@ block homecontent
 
 
 
-
+    script(src="/bower_components/cropper/dist/cropper.min.js")
     script(src="/js/user.js")
