@@ -253,7 +253,7 @@
   display: none;
   #userLogoPreview{
       display: block;
-      width: 500px;
+      width: 400px;
       height: 400px;
       background: transparent;
       border:1px solid #dddddd;
@@ -288,6 +288,32 @@
         float: left;
         display: block;
         background: #FFFFFF;
+      }
+      .put-image-data-btn{
+        height:30px;
+        width: 200px;
+        background: #00CC66;
+        -webkit-border-radius:4px;
+        -moz-border-radius:4px;
+        border-radius:4px;
+        position: absolute;
+        left:65px;
+        bottom:60px;
+        text-align: center;
+        line-height:30px;
+        color: #FFFFFF;
+        font-weight:700;
+        cursor: pointer;
+        #put-image-data-input{
+          position: absolute;
+          height:100%;
+          width: 100%;
+          z-index:10;
+          left:0;
+          top:0;
+          display: block;
+          opacity:0;
+        }
       }
       .get-image-data-btn{
         height:30px;

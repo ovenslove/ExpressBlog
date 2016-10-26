@@ -192,6 +192,10 @@ $(function () {
             $("#userLogoPreview").slideDown(200);
         }
     });
+
+
+
+
     var $image = $('#userlogo-img');
     $image.cropper({
         aspectRatio: 16 / 16,
@@ -205,6 +209,36 @@ $(function () {
             console.log(e.rotate);
             console.log(e.scaleX);
             console.log(e.scaleY);
+        }
+    });
+    $(".get-image-data-btn").on('click',function () {
+        var imgdata=$image.cropper('getCroppedCanvas').toDataURL();
+        // console.log(imgdata);
+        $.post('/home/user/exclogo',{'imgdata':imgdata},function (data) {
+            console.log(data);
+        });
+        // window.open(imgdata);
+    });
+    //判断浏览器是否支持FileReader接口
+    if(typeof FileReader == 'undefined'){
+        result.InnerHTML="<p>你的浏览器不支持FileReader接口！</p>";
+        //使选择控件不可操作
+        file.setAttribute("disabled","disabled");
+    }
+
+    $("#put-image-data-input").on('change',function () {
+        var file = $(this)[0].files[0];
+        if(!/image\/\w+/.test(file.type)){
+            alert("看清楚，这个需要图片！");
+            return false;
+        }
+        var reader = new FileReader();
+        //将文件以Data URL形式读入页面
+        reader.readAsDataURL(file);
+        reader.onload=function(e){
+            //显示文件
+            var data=this.result;
+            $image.cropper('replace', data);
         }
     });
 });

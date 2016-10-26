@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var session = require('express-session');
 var md5 = require('md5');
-
+var fs = require('fs');
 
 /*-------------------数据库相关----------------------------*/
 var mongoose=require('mongoose');
@@ -66,6 +66,30 @@ router.post('/home/user/excpsd',function (req, res, next) {
 
     // res.json(postdata);
     // res.render('user', data);
+});
+
+function base64_decode(base64str, file) {
+    // create buffer object from base64 encoded string, it is important to tell the constructor that the string is base64 encoded
+    var bitmap = new Buffer(base64str, 'base64');
+    // write buffer to file
+    fs.writeFileSync(file, bitmap);
+    console.log('******** File created from base64 encoded string ********');
+}
+
+router.post('/home/user/exclogo',function (req, res, next) {
+    var imgData=req.body.imgdata;
+    var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
+    var dataBuffer = new Buffer(base64Data, 'base64');
+    var name='image-'+new Date().getTime()+'.png';
+    fs.writeFile(name, dataBuffer, function(err) {
+        if(err){
+            res.send(err);
+        }else{
+            res.send("保存成功！");
+        }
+    });
+    // res.send(imgData);
+
 });
 
 module.exports = router;
