@@ -3,6 +3,7 @@ var router = express.Router();
 var session = require('express-session');
 var md5 = require('md5');
 var fs = require('fs');
+var path=require('path');
 
 /*-------------------数据库相关----------------------------*/
 var mongoose=require('mongoose');
@@ -17,15 +18,26 @@ var userModel = db.model('user',userSchema);
 
 
 router.use(session({ secret: 'keyboard cat' , resave: false, saveUninitialized: false}));
+
+
+
 /*用户信息*/
 router.get('/home/user',function (req, res, next) {
-    // var ss=session;
-  var data={
-    'title':'个人信息'
-  };
-  // res.send();
 
-  res.render('user', data);
+    var username=req.session.passport.user.username;
+    // var ss=session;
+
+    userModel.findOne({username:username},function (err,user) {
+        var data={
+            'title':'个人信息',
+            'userdata':user
+        };
+        // res.send(data);
+        res.render('user', data);
+
+    });
+
+
 });
 
 /*修改密码*/
@@ -73,22 +85,37 @@ function base64_decode(base64str, file) {
     var bitmap = new Buffer(base64str, 'base64');
     // write buffer to file
     fs.writeFileSync(file, bitmap);
-    console.log('******** File created from base64 encoded string ********');
 }
 
 router.post('/home/user/exclogo',function (req, res, next) {
+    var username=req.session.passport.user.username;
+    var paths=path.normalize('/images/userlogo/');
+
     var imgData=req.body.imgdata;
     var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
     var dataBuffer = new Buffer(base64Data, 'base64');
     var name='image-'+new Date().getTime()+'.png';
-    fs.writeFile(name, dataBuffer, function(err) {
+    var logoUrl=paths+name;
+    fs.writeFile('public'+logoUrl, dataBuffer, function(err) {
         if(err){
             res.send(err);
         }else{
-            res.send("保存成功！");
+            userModel.findOne({username:username},function (err,user) {
+                userModel.update({_id: user._id}, {$set: {logoUrl: logoUrl}}, function (err) {
+                    res.send({
+                        status: 1,
+                        type: 1,
+                        message: '修改成功'
+                    });
+                });
+            });
+
+           /* res.send({
+                status:1,
+                message:'ok'
+            });*/
         }
     });
-    // res.send(imgData);
 
 });
 

@@ -2398,21 +2398,15 @@ $(function () {
         aspectRatio: 16 / 16,
         preview:".userlogo-preview",
         crop: function(e) {
-            // Output the result data for cropping image.
-            console.log(e.x);
-            console.log(e.y);
-            console.log(e.width);
-            console.log(e.height);
-            console.log(e.rotate);
-            console.log(e.scaleX);
-            console.log(e.scaleY);
         }
     });
     $(".get-image-data-btn").on('click',function () {
-        var imgdata=$image.cropper('getCroppedCanvas').toDataURL();
+        var imgdata=$image.cropper('getCroppedCanvas',{width:400,height:400}).toDataURL();
         // console.log(imgdata);
         $.post('/home/user/exclogo',{'imgdata':imgdata},function (data) {
-            console.log(data);
+            if(data.status === 1){
+                window.location.reload();
+            }
         });
         // window.open(imgdata);
     });

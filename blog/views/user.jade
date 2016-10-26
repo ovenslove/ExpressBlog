@@ -17,10 +17,10 @@ block homecontent
                     .user-sim-title BaseInformation
                     .user-sim-box
                         label UserName:
-                        input(type="text",disabled,value='1905997838@qq.com')
+                        input(type="text",disabled,value="#{userdata.username}")
                     .user-sim-box
                         label UserPassword:
-                        input(type="password",disabled,value='1905997838@qq.com')
+                        input(type="password",disabled,value='123456789')
                         span.exchangePassword Edit
                         .exchangePassword-box
                             //i.remove.icon.close-btn
@@ -48,25 +48,25 @@ block homecontent
                                     span
                             .user-password-sim-box
                                 label VerifiCode:
-                                span#verifiCode 3+11=?
+                                span#verifiCode
                                 input(type='text')#verifiCodeInput
                             .user-password-sim-box
                                 #exchangePassword-cimmit-btn Submit
                     .user-sim-box
                         label UserLogo:
                         #userLogoPreview-show-container
-                            img#userLogoPreview-show(src="/images/sim-img.jpg")
+                            img#userLogoPreview-show(src="#{userdata.logoUrl}")
                         span.exchangeLogo Edit
                         #userLogoPreview-container.clearfix
                             #userLogoPreview
-                                img#userlogo-img(src="/images/sim-img.jpg")
+                                img#userlogo-img(src="#{userdata.logoUrl}")
                             .userlogo-preview-box
                                 .userlogo-preview.lg
                                 .userlogo-preview.mid
                                 .userlogo-preview.small
-                                .put-image-data-btn 选择文件
-                                    input(type="file")#put-image-data-input
-                                .get-image-data-btn 确定
+                                .put-image-data-btn Select File
+                                    input(type="file",accept="image/*")#put-image-data-input
+                                .get-image-data-btn Submit
                     .user-sim-box
                         label Telephone:
                         input(type="tel",placeholder="What's your telephone number?")
