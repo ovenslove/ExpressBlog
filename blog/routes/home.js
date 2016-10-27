@@ -2,27 +2,28 @@ var express = require('express');
 var router = express.Router();
 var session = require('express-session');
 var md5 = require('md5');
-
-/*-------------------数据库相关----------------------------*/
+var http = require('http');
+var fetch = require('node-fetch');
+/*/!*-------------------数据库相关----------------------------*!/
 var mongoose=require('mongoose');
 //创建一个数据库连接
 var db =mongoose.createConnection('localhost','blog');
-/*引入Schema配置文件*/
+/!*引入Schema配置文件*!/
 var userSchemaConf=require('../schema/userSchema.js');
-/*生成一个schema*/
+/!*生成一个schema*!/
 var userSchema  = new mongoose.Schema(userSchemaConf);
-/*根据schema生成模型*/
+/!*根据schema生成模型*!/
 var userModel = db.model('user',userSchema);
 
-/*blog*/
-/*引入blogsSchema配置文件*/
+/!*blog*!/
+/!*引入blogsSchema配置文件*!/
 var blogsSchemaConf=require('../schema/blogsSchema.js');
-/*生成一个schema*/
+/!*生成一个schema*!/
 var blogSchema  = new mongoose.Schema(blogsSchemaConf);
-/*根据schema生成模型*/
+/!*根据schema生成模型*!/
 var blogModel = db.model('blog',blogSchema);
-/*-------------------数据库相关----------------------------*/
-/*-------------------权限认证相关----------------------------*/
+/!*-------------------数据库相关----------------------------*!/
+/!*-------------------权限认证相关----------------------------*!/
 var passport = require('passport')
     , LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(
@@ -32,8 +33,8 @@ passport.use(new LocalStrategy(
             if (!user) {
                 return done(null, false, { message: '用户名不存在.' });
             }
-            /*  console.log('----------------------------------'+user.password);
-             console.log('----------------------------------'+md5(password));*/
+            /!*  console.log('----------------------------------'+user.password);
+             console.log('----------------------------------'+md5(password));*!/
             if (user.password != md5(password)) {
                 return done(null, false, { message: '密码不匹配.' });
             }
@@ -49,27 +50,41 @@ passport.serializeUser(function(user, done) {
 });
 passport.deserializeUser(function(user, done) {
     done(null, user);
-});
+});*/
 /*-------------------权限认证相关----------------------------*/
 /*--------------------------------------------------------*/
 
 /*主首页*/
 router.get('/home', function(req, res, next) {
+    // var username=req.session.passport.user.username;
     var data={
         'title':'个人主页'
     };
-    // var sess = req.session.passport || null;
-    var sess={
-        "_id" : "58059c6eb7c69b1bd4574324",
-        "username": "1905997838@qq.com"
-    };
-    // res.render('home', data);
     if(req.isAuthenticated()){
         console.log(req.isAuthenticated());
         res.render('home', data);
     }else{
         res.redirect('/login');
     }
+});
+
+router.get('/home/oneWord', function(req, res, next) {
+    var url = "http://wufazhuce.com/"
+    fetch(url)
+        .then(function(res) {
+            return res.text();
+        }).then(function(body) {
+        var results = /<a.+(href="http:\/\/wufazhuce\.com\/one\/).+([\u4e00-\u9fa5].+)(<\/a>)/g.exec(body);
+        var s=results[0].replace(/<a.+href="(http:\/\/wufazhuce\.com\/one\/.+).+">.+/g,'$1');
+        console.log(results[0]);
+        // https://www.npmjs.com/package/cheerio
+        // https://github.com/jschr/textillate
+        /*res.json({
+            status:1,
+            message:s
+        });*/
+    });
+
 });
 
 
