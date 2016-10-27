@@ -4,6 +4,7 @@ var session = require('express-session');
 var md5 = require('md5');
 var http = require('http');
 var fetch = require('node-fetch');
+var cheerio = require('cheerio')
 /*/!*-------------------数据库相关----------------------------*!/
 var mongoose=require('mongoose');
 //创建一个数据库连接
@@ -69,20 +70,27 @@ router.get('/home', function(req, res, next) {
 });
 
 router.get('/home/oneWord', function(req, res, next) {
-    var url = "http://wufazhuce.com/"
+    // var url = "http://wufazhuce.com/";
+    var url = "http://www.dailyenglishquote.com/";
     fetch(url)
         .then(function(res) {
             return res.text();
         }).then(function(body) {
-        var results = /<a.+(href="http:\/\/wufazhuce\.com\/one\/).+([\u4e00-\u9fa5].+)(<\/a>)/g.exec(body);
-        var s=results[0].replace(/<a.+href="(http:\/\/wufazhuce\.com\/one\/.+).+">.+/g,'$1');
-        console.log(results[0]);
+        var $ = cheerio.load(body);
+    /*    res.send(body);
+        return;*/
+        var s1=$(".entry.cf").eq(0).find('p').eq(0).find('strong').html();
+        var s2=$(".entry.cf").eq(0).find('div').eq(3).html();
+        var s3=$(".entry.cf").eq(0).find('p').eq(1).html();
         // https://www.npmjs.com/package/cheerio
         // https://github.com/jschr/textillate
-        /*res.json({
+        res.json({
             status:1,
-            message:s
-        });*/
+            message:{
+                en:s1+s2,
+                zh:s3
+            }
+        });
     });
 
 });

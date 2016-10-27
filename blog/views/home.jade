@@ -1,10 +1,16 @@
 extends layout/homeLayout
 
 block homecontent
+    link(rel='stylesheet',type="text/css", href='/bower_components/animate.css/animate.min.css')
     .home-box
         .ui.breadcrumb.breadcrumb-nav
             a(href="/").section MainPage
             .divider  /
             .active.section Home
         article.article
-            h3#OneWord
+            .oneWord-container
+                h1.oneWord-en
+                h3.oneWord-zh
+    script(src="/bower_components/textillate/assets/jquery.lettering.js")
+    script(src="/bower_components/textillate/jquery.textillate.js")
+
