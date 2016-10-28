@@ -16,6 +16,9 @@ block homecontent
                 .user-sim-panle
                     .user-sim-title BaseInformation
                     .user-sim-box
+                        label NickName:
+                        input(type="text",value="#{userdata.nickname || 'BlogName'}")
+                    .user-sim-box
                         label UserName:
                         input(type="text",disabled,value="#{userdata.username}")
                     .user-sim-box

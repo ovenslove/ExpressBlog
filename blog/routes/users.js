@@ -23,21 +23,16 @@ router.use(session({ secret: 'keyboard cat' , resave: false, saveUninitialized: 
 
 /*用户信息*/
 router.get('/home/user',function (req, res, next) {
-
+    /*获取session中的用户名*/
     var username=req.session.passport.user.username;
-    // var ss=session;
-
+    /*查找用户信息*/
     userModel.findOne({username:username},function (err,user) {
         var data={
             'title':'个人信息',
             'userdata':user
         };
-        // res.send(data);
         res.render('user', data);
-
     });
-
-
 });
 
 /*修改密码*/
@@ -80,13 +75,7 @@ router.post('/home/user/excpsd',function (req, res, next) {
     // res.render('user', data);
 });
 
-function base64_decode(base64str, file) {
-    // create buffer object from base64 encoded string, it is important to tell the constructor that the string is base64 encoded
-    var bitmap = new Buffer(base64str, 'base64');
-    // write buffer to file
-    fs.writeFileSync(file, bitmap);
-}
-
+/*修改头像*/
 router.post('/home/user/exclogo',function (req, res, next) {
     var username=req.session.passport.user.username;
     var paths=path.normalize('/images/userlogo/');
@@ -109,11 +98,6 @@ router.post('/home/user/exclogo',function (req, res, next) {
                     });
                 });
             });
-
-           /* res.send({
-                status:1,
-                message:'ok'
-            });*/
         }
     });
 

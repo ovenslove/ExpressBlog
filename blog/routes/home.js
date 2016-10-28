@@ -5,27 +5,27 @@ var md5 = require('md5');
 var http = require('http');
 var fetch = require('node-fetch');
 var cheerio = require('cheerio')
-/*/!*-------------------数据库相关----------------------------*!/
+/*-------------------数据库相关----------------------------*/
 var mongoose=require('mongoose');
 //创建一个数据库连接
 var db =mongoose.createConnection('localhost','blog');
-/!*引入Schema配置文件*!/
+/*引入Schema配置文件*/
 var userSchemaConf=require('../schema/userSchema.js');
-/!*生成一个schema*!/
+/*生成一个schema*/
 var userSchema  = new mongoose.Schema(userSchemaConf);
-/!*根据schema生成模型*!/
+/*根据schema生成模型*/
 var userModel = db.model('user',userSchema);
 
-/!*blog*!/
-/!*引入blogsSchema配置文件*!/
+/*blog*/
+/*引入blogsSchema配置文件*/
 var blogsSchemaConf=require('../schema/blogsSchema.js');
-/!*生成一个schema*!/
+/*生成一个schema*/
 var blogSchema  = new mongoose.Schema(blogsSchemaConf);
-/!*根据schema生成模型*!/
+/*根据schema生成模型*/
 var blogModel = db.model('blog',blogSchema);
-/!*-------------------数据库相关----------------------------*!/
-/!*-------------------权限认证相关----------------------------*!/
-var passport = require('passport')
+/*-------------------数据库相关----------------------------*/
+/*-------------------权限认证相关----------------------------*/
+/*var passport = require('passport')
     , LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(
     function(username, password, done) {
@@ -62,7 +62,6 @@ router.get('/home', function(req, res, next) {
         'title':'个人主页'
     };
     if(req.isAuthenticated()){
-        console.log(req.isAuthenticated());
         res.render('home', data);
     }else{
         res.redirect('/login');

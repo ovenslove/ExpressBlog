@@ -1,4 +1,5 @@
 var userSchema = {
+    nickname:String,
     username:String,
     password:String,
     registTime:Date,
