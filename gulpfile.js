@@ -9,7 +9,6 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 
-
 /*js检查任务*/
 gulp.task('jshints', function() {
     gulp.src('./src/js/*.js')

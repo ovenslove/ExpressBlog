@@ -8,6 +8,7 @@
     "pm2": "pm2 start bin/run ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
   "dependencies": {
     "co": "^4.6.0",
     "debug": "^2.2.0",
