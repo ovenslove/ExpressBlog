@@ -235,4 +235,26 @@ $(function () {
             $image.cropper('replace', data);
         }
     });
+
+    /*基本信息提交*/
+    $(".user-info-submit").on('click',function () {
+       var postData={
+           nickname:$("#nickname-input").val() || '',
+           age:$("#age-input").val() || '',
+           sex:$("#sex-input").val() || '',
+           phoneNumber:$("#phoneNumber-input").val() || '',
+           education:$("#education-input").val() || '',
+           occupation:$("#occupation-input").val() || '',
+           hobbit:$("#hobbit-input").val() || '',
+           introduce:$("#introduce-input").val() || ''
+       };
+       $.post('/home/user/excBaseInfo',postData,function (data) {
+          if(data.status===1){
+              window.location.reload();
+          }else {
+              alert("更新失败，请重新提交！")
+          }
+       });
+
+    });
 });

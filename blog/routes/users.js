@@ -35,6 +35,22 @@ router.get('/home/user',function (req, res, next) {
     });
 });
 
+/*修改基本信息*/
+router.post('/home/user/excBaseInfo',function (req, res, next) {
+    var username = "1905997838@qq.com";
+    var ddd=req.body;
+    userModel.findOne({username:username},function (err,user) {
+        userModel.update({_id:user._id},{$set:ddd},function(err){
+            res.json({
+                status:1,
+                type:1,
+                message:'修改成功'
+            });
+        });
+    });
+   // res.send(ddd);
+});
+
 /*修改密码*/
 router.post('/home/user/excpsd',function (req, res, next) {
     var username=req.session.passport.user.username;

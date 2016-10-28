@@ -17,13 +17,13 @@ block homecontent
                     .user-sim-title BaseInformation
                     .user-sim-box
                         label NickName:
-                        input(type="text",value="#{userdata.nickname || 'BlogName'}")
+                        input(type="text",value="#{userdata.nickname || ''}")#nickname-input
                     .user-sim-box
                         label UserName:
                         input(type="text",disabled,value="#{userdata.username}")
                     .user-sim-box
                         label UserPassword:
-                        input(type="password",disabled,value='123456789')
+                        input(type="password",disabled,value='******')
                         span.exchangePassword Edit
                         .exchangePassword-box
                             //i.remove.icon.close-btn
@@ -72,30 +72,34 @@ block homecontent
                                 .get-image-data-btn Submit
                     .user-sim-box
                         label Telephone:
-                        input(type="tel",placeholder="What's your telephone number?")
+                        input(type="tel",placeholder="What's your telephone number?",value="#{userdata.phoneNumber || ''}")#phoneNumber-input
                 .user-sim-panle
                     .user-sim-title ExtraInformation
                     .user-sim-box
                         label Sex:
-                        select.ui.dropdown(style="height:30px;line-height:30px;")
+                        select.ui.dropdown(style="height:30px;line-height:30px;")#sex-input
                             option(value='') Gender
-                            option(value='1') Male
-                            option(value='0') Female
+                            - if ( userdata.sex == 'Male')
+                                option(value='Male',selected) Male
+                                option(value='Female') Female
+                            - else
+                                option(value='Male') Male
+                                option(value='Female',selected) Female
                     .user-sim-box
                         label Age:
-                        input(type="number",min='16',max='60',value='18')
+                        input(type="number",min='16',max='60',value="#{userdata.age || ''}")#age-input
                     .user-sim-box
                         label Education:
-                        input(type="text",placeholder="which university are you in?")
+                        input(type="text",placeholder="which university are you in?",value="#{userdata.education || ''}")#education-input
                     .user-sim-box
                         label Occupation:
-                        input(type="text",placeholder="What's your occupation?")
+                        input(type="text",placeholder="What's your occupation?",value="#{userdata.occupation || ''}")#occupation-input
                     .user-sim-box
                         label Hobbit:
-                        input(type="text",placeholder="What do you like to do?")
+                        input(type="text",placeholder="What do you like to do?",value="#{userdata.hobbit || ''}")#hobbit-input
                     .user-sim-box
                         label(style="vertical-align:top;") Introduce:
-                        textarea(placeholder="introduce yourself!")
+                        textarea#introduce-input(placeholder="introduce yourself!")=userdata.introduce
                 .user-info-submit submit
 
 
