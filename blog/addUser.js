@@ -11,6 +11,7 @@ var userModel = db.model('user',userSchema);
 // var blogEntity = new blogModel({title:'我就是标题','author':'ovenslove','intr':'我就是简介，看我看我','info':'别动，我是从mongodb出来的摘要'});
 
 
+
     var userEntity= new userModel({
         username:'222222',
         password:'222222'

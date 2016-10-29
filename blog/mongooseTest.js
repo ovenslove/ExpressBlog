@@ -24,5 +24,5 @@ for(var i=50;i<60;i++){
         '一个在nodejs中使用的对mongodb进行建模的工具，可以定义一些Schema（定义每个doc里的字段名、类型、初始值、验证条件等），增删改查等，功能比较贴心'
     });
     console.log(blogEntity.title);
-    blogEntity.save()
+    blogEntity.save();
 }

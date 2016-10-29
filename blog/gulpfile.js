@@ -10,6 +10,7 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 // var imagemin = require('gulp-imagemin');
 
+
 /*js检查任务*/
 gulp.task('jshints', function() {
     gulp.src('./lib/js/*.js')
