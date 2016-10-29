@@ -179,7 +179,11 @@ $(function () {
             console.log(postobj);
             /*开始提交表单*/
             $.post('/home/addBlogs',postobj,function (data) {
-               console.log(data);
+               if(data.status===1){
+                   window.location.href='/home/blogList';
+               }else {
+                   window.location.reload();
+               }
             });
         }
     });
