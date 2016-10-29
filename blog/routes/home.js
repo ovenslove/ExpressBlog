@@ -58,6 +58,7 @@ passport.deserializeUser(function(user, done) {
 /*主首页*/
 router.get('/home', function(req, res, next) {
     // var username=req.session.passport.user.username;
+    // res.send(req.session);
     var data={
         'title':'个人主页'
     };

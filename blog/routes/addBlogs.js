@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var md5 = require('md5');
-
+var fs = require('fs');
+var path=require('path');
 /*--------------------------------------------------------*/
 var session = require('express-session');
 /*-------------------数据库相关----------------------------*/
@@ -16,26 +17,7 @@ var userSchema = new mongoose.Schema(userSchemaConf);
 var userModel = db.model('user', userSchema);
 /*-------------------数据库相关----------------------------*/
 /*-------------------权限认证相关----------------------------*/
-var passport = require('passport')
-    , LocalStrategy = require('passport-local').Strategy;
-passport.use(new LocalStrategy(
-    function (username, password, done) {
-        userModel.findOne({username: username}, function (err, user) {
-            if (err) {
-                return done(err);
-            }
-            if (!user) {
-                return done(null, false, {message: '用户名不存在.'});
-            }
-            /*  console.log('----------------------------------'+user.password);
-             console.log('----------------------------------'+md5(password));*/
-            if (user.password != md5(password)) {
-                return done(null, false, {message: '密码不匹配.'});
-            }
-            return done(null, user);
-        });
-    }
-));
+var passport = require('passport');
 router.use(session({secret: 'keyboard cat', resave: false, saveUninitialized: false}));
 router.use(passport.initialize());
 router.use(passport.session());
@@ -66,7 +48,7 @@ router.get('/home/addBlogs', function (req, res, next) {
 
 });
 
-router.post('/addBlogs', function (req, res, next) {
+router.post('/home/addBlogs', function (req, res, next) {
     var mongoose = require('mongoose');
 //创建一个数据库连接
     var db = mongoose.createConnection('localhost', 'blog');
@@ -77,25 +59,68 @@ router.post('/addBlogs', function (req, res, next) {
     /*根据schema生成模型*/
     var blogModel = db.model('blog', blogSchema);
 
+    // var username="1905997838@qq.com";
+    var username=req.session.passport.user.nickname;
+    var timeid=new Date().getTime();
     var blogData = {
-        blogId: 1,
+        blogId: timeid,
         title: req.body.blogTitle,
-        imgUrl: req.body.previewImageUrl,
-        author: 'ovenslove',
+        postStatu:req.body.postStatus,
+        author: username,
         intr: req.body.blogIntr,
         addTime: new Date(),
         updateTime: new Date(),
         mark: req.body.markGroup.split(','),
-        content: req.body.blogContent
+        content: req.body.blogContent,
+        viewCount:0,
+        priseCount:0
     };
-    /*生成一个实体*/
-    var blogEntity = new blogModel(blogData);
-    if (blogEntity.save()) {
-        res.redirect('/home');
-    } else {
-        res.send("添加失败");
+
+    if(req.body.imageType==1){
+        var paths=path.normalize('/images/blogPreviewImages/');
+
+        var imgData=req.body.previewImageUrl;
+        var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
+        var dataBuffer = new Buffer(base64Data, 'base64');
+        var name='image-'+timeid+'.png';
+        var logoUrl=paths+name;
+        fs.writeFile('public'+logoUrl, dataBuffer, function(err) {
+            if(err){
+                res.send(err);
+            }else{
+                blogData['imgUrl']=logoUrl;
+                var blogEntity = new blogModel(blogData);
+                if (blogEntity.save()) {
+                    res.json({
+                       status:1,
+                        message:'ok'
+                    });
+                } else {
+                    res.json({
+                        status:0,
+                        message:'error'
+                    });
+                }
+                // res.json(blogData);
+            }
+        });
+
+    }else {
+        blogData.imgUrl=req.body.previewImageUrl;
+        var blogEntity = new blogModel(blogData);
+        if (blogEntity.save()) {
+            res.json({
+                status:1,
+                message:'ok'
+            });
+        } else {
+            res.json({
+                status:0,
+                message:'error'
+            });
+        }
     }
-    // res.render('addBlogs',data);
+
 });
 
 module.exports = router;

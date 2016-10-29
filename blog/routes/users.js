@@ -16,28 +16,34 @@ var userSchema  = new mongoose.Schema(userSchemaConf);
 /*根据schema生成模型*/
 var userModel = db.model('user',userSchema);
 
-
+/*-------------------权限认证相关----------------------------*/
+var passport = require('passport');
 router.use(session({ secret: 'keyboard cat' , resave: false, saveUninitialized: false}));
-
-
+router.use(passport.initialize());
+router.use(passport.session());
+/*-------------------权限认证相关----------------------------*/
 
 /*用户信息*/
 router.get('/home/user',function (req, res, next) {
-    /*获取session中的用户名*/
-    var username=req.session.passport.user.username;
-    /*查找用户信息*/
-    userModel.findOne({username:username},function (err,user) {
-        var data={
-            'title':'个人信息',
-            'userdata':user
-        };
-        res.render('user', data);
-    });
+    if(req.isAuthenticated()){
+        /*获取session中的用户名*/
+        var username=req.session.passport.user.username;
+        /*查找用户信息*/
+        userModel.findOne({username:username},function (err,user) {
+            var data={
+                'title':'个人信息',
+                'userdata':user
+            };
+            res.render('user', data);
+        });
+    }else{
+        res.redirect('/login');
+    }
 });
 
 /*修改基本信息*/
 router.post('/home/user/excBaseInfo',function (req, res, next) {
-    var username = "1905997838@qq.com";
+    var username=req.session.passport.user.username;
     var ddd=req.body;
     userModel.findOne({username:username},function (err,user) {
         userModel.update({_id:user._id},{$set:ddd},function(err){

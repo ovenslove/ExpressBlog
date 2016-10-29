@@ -16,3 +16,34 @@
   margin: 30px auto 20px;
   display: block;
 }
+.imgUrlTtype{
+  width: 94px;
+  height: 37px;
+  line-height:23px !important;
+  text-align: center !important;
+  position: relative;
+}
+#addBlogsPreviewImage{
+  display: block;
+  width: 100%;
+  height:100%;
+  position: absolute;
+  left:0;
+  top:0;
+  z-index:10;
+  opacity:0;
+}
+/*图片预览效果*/
+#addBlogsPreviewImageShowBox{
+  width: 300px;
+  height:300px;
+  margin: 10px 0;
+  border: 1px solid #dddddd;
+  padding: 10px;
+  display: none;
+  overflow: hidden;
+  #addBlogsPreviewImageShow{
+    width: 100%;
+    height:100%;
+  }
+}

@@ -120,12 +120,118 @@ editor.onchange = function () {
 editor.create();
 
 
-$('.ui.checkbox')
-    .checkbox()
-;
+$('.ui.checkbox input').checkbox();
 $('.dropdown')
     .dropdown()
 ;
+
+$(function () {
+    var postobj={};
+    /*表单检查*/
+    $(".ndCheck").on('blur',function () {
+        var vals=$(this).val();
+        if(vals!==''){
+            $(this).addClass('formActive');
+        }else {
+            $(this).removeClass('formActive');
+        }
+
+        if($(".formActive").length === $(".ndCheck").length){
+            $("#submit-btn").addClass('formSubmitActive');
+        }
+    });
+    $('input[name=previewImageUrl]').on('blur',function () {
+        var name=$(this).attr('name');
+        postobj[name]=$(this).val();
+        if($(this).attr('disabled')=='disabled'){
+            postobj['imageType']=1; /*标记照片类型位本地上传*/
+            $(this).addClass('formActive');
+            var imgdata=$image.cropper('getCroppedCanvas',{width:300,height:300}).toDataURL();
+            postobj[name]=imgdata;
+        }else if($(this).val() !==''){
+            postobj['imageType']=0; /*标记照片类型位互联网链接*/
+            $image.attr({src:$(this).val()});
+            $image[0].onload=function () {
+                $("#addBlogsPreviewImageShowBox").show();
+
+            };
+        }else {
+            $(this).removeClass('formActive');
+        }
+    });
+    /*表单提交*/
+    $("#submit-btn").on('click',function () {
+        $(".ndCheck").blur();
+        $('input[name=previewImageUrl]').blur();
+        if($(this).hasClass('formSubmitActive')){
+
+            $(".ndCheck").each(function () {
+
+                var name=$(this).attr('name');
+                if(name=='lockStatus'){
+                    var val=$(this).prop("checked");
+                }else {
+                    var val=$(this).val();
+                }
+                postobj[name]=val;
+            });
+
+            console.log(postobj);
+            /*开始提交表单*/
+            $.post('/home/addBlogs',postobj,function (data) {
+               console.log(data);
+            });
+        }
+    });
+
+    var $image = $('#addBlogsPreviewImageShow');
+    $image.cropper({
+        aspectRatio: 9 / 9,
+        autoCropArea: 1,
+        dragCrop:false,
+        resizable:false
+
+    });
+
+    //判断浏览器是否支持FileReader接口
+    if(typeof FileReader == 'undefined'){
+        result.InnerHTML="<p>你的浏览器不支持FileReader接口！</p>";
+        //使选择控件不可操作
+        file.setAttribute("disabled","disabled");
+    }
+    /*本地上传*/
+    $("#addBlogsPreviewImage").on('change',function () {
+        $("input[name=previewImageUrl]").val('');
+        var file = $(this)[0].files[0];
+        if(!/image\/\w+/.test(file.type)){
+            alert("看清楚，这个需要图片！");
+            return false;
+        }
+        var reader = new FileReader();
+        //将文件以Data URL形式读入页面
+        reader.readAsDataURL(file);
+        reader.onload=function(e){
+            //显示文件
+            var imgdata=this.result;
+            $image.cropper('replace', imgdata);
+
+            $("#addBlogsPreviewImageShowBox").slideDown();
+            $("input[name=previewImageUrl]").attr({
+                disabled:"disabled"
+            })
+        }
+    });
+    /*网络资源*/
+    $("#addBlogsPreviewImageUrl").on("click",function () {
+        $("input[name=previewImageUrl]").removeAttr("disabled");
+        $("#addBlogsPreviewImageShow").removeClass('cropper-hidden').attr({src:''});
+        $(".cropper-container").remove();
+    });
+
+
+
+});
+
 
 $('.ui.checkbox')
     .checkbox()

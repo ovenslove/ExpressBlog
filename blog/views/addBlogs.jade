@@ -3,51 +3,51 @@ extends layout/homeLayout
 block homecontent
     link(rel='stylesheet',type="text/css", href='/css/wangEditor.css')
     link(rel='stylesheet',type="text/css", href='/css/base.css')
+    link(rel='stylesheet',type="text/css", href='/bower_components/cropper/dist/cropper.min.css')
     link(rel='stylesheet',type="text/css", href='/css/blogEdit.css')
+    .home-box
+        .ui.breadcrumb.breadcrumb-nav
+            a(href="/").section MainPage
+            .divider  /
+            a(href="/home").section Home
+            .divider  /
+            .active.section NewBlog
+        .main-box
+            form.ui.form
+                .field
+                    label Blog Title
+                    input.ndCheck(type='text',name="blogTitle",placeholder="You need a good title")
+                .field
+                    label Blog Introduce
+                    textarea.ndCheck(rows='2',name="blogIntr",placeholder="Simply tell us something")
+                .inline.field
+                    .ui.toggle.checkbox
+                        input.ndCheck.lockStatus(type='checkbox',name='postStatus')
+                        label Publish to the home page
+                .field
+                    label Blog PreviewImage
+                    input(type='url',name='previewImageUrl',placeholder="Image Url (Allow the chain)",style="width:calc(100% - 100px)")
+                    .ui.dropdown.label.imgUrlTtype ImgUrl
+                        i.dropdown.icon
+                        .menu
+                            .item#addBlogsPreviewImageUrl network
+                            .item Local
+                                input#addBlogsPreviewImage(type="file")
+                    #addBlogsPreviewImageShowBox
+                        img#addBlogsPreviewImageShow
+                .field
+                    label Blog Marks
+                    input.ndCheck(type='text', name='markGroup',placeholder="Html , Css , Node....")
+                div.editor-container
+                    div#editor-box
+                input.ndCheck#blogContent(type="hidden",name="blogContent")
+                .positive.ui.button#submit-btn
+                    | SUBMIT
 
-    .main-box
-        form.ui.form(method="post",action="/addBlogs")
-            .field
-                label Blog Title
-                input(type='text',name="blogTitle",placeholder="You need a good title")
-            .field
-                label Blog Introduce
-                textarea(rows='2',name="blogIntr",placeholder="Simply tell us something")
-            .inline.field
-                .ui.toggle.checkbox
-                    input.hidden(type='checkbox', tabindex='0',name='lockStatus')
-                    label Lock
-            .field
-                label Blog PreviewImage
-                input(type='url',name='previewImageUrl',placeholder="Image Url (Allow the chain)")
-            .field
-                label Blog Marks
-                .ui.fluid.multiple.search.selection.dropdown
-                    input(type='hidden', name='markGroup')
-                    i.dropdown.icon
-                    .default.text give your blog some beautiful marks
-                    .menu
-                        .item(data-value='html', data-text='html')
-                            |  html
-                        .item(data-value='css', data-text='css')
-                            |  css
-                        .item(data-value='node', data-text='node')
-                            |  node
-                        .item(data-value='express', data-text='express')
-                            |  express
-                        .item(data-value='jade', data-text='jade')
-                            |  jade
-                        .item(data-value='sass', data-text='sass')
-                            |  sass
-            div.editor-container
-                div#editor-box
-            input#blogContent(type="hidden",name="blogContent")
-            button.positive.ui.button#submit-btn
-                | SUBMIT
-
-        div.editor-markdown-container
+            div.editor-markdown-container
 
     script(src="/js/wangEditor.js")
+    script(src="/bower_components/cropper/dist/cropper.min.js")
     script(src="/js/blogEdit.js")
 
 
