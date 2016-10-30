@@ -1,5 +1,5 @@
 var blogSchema = {
-    blogId:Number,  //文章ID
+    blogId:String,  //用户ID
     title:String,   //定义一个属性name，类型为String
     imgUrl:String,  //列表预览照片(网络图或者本地图均可)
     author:String,   //定义一个属性name，类型为String

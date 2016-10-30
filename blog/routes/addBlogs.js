@@ -60,11 +60,12 @@ router.post('/home/addBlogs', function (req, res, next) {
 
     // var username="1905997838@qq.com";
     var  username=req.session.passport.user.username;
+    var  userId=req.session.passport.user._id;
     userModel.findOne({username:username},function (err,user) {
         /*user*/
         var timeid=new Date().getTime();
         var blogData = {
-            blogId: timeid,
+            blogId: userId,
             title: req.body.blogTitle,
             postStatu:req.body.postStatus,
             author: user.nickname,

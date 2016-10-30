@@ -47,5 +47,27 @@ block homecontent
                                         .item
                                             .ui.black.empty.circular.label
                                             | Stop
+            .pagination-container
+                ul.pagination-listGroup
+                    -if (pages <= 10)
+                        - for (var x = 0; x < pages; x++)
+                            - if ( x==curPage )
+                                li.pagination-listItem.activePage
+                                    a(href='/home/blogList/'+(x+1))=x+1
+                            - else
+                                li.pagination-listItem
+                                    a(href='/home/blogList/'+(x+1))=x+1
+                    -else
+                        li.pagination-listItem
+                            a(href='/home/blogList/1') Front
+                        - for (var x = 0; x < pages; x++)
+                            - if ( x==curPage )
+                                li.pagination-listItem.activePage
+                                    a(href='/home/blogList/'+(x+1))=x + 1
+                            - else
+                                li.pagination-listItem
+                                    a(href='/home/blogList/'+(x+1))=x + 1
+                        li.pagination-listItem
+                            a(href='/home/blogList/'+(pages)) End
 
     script(src="/js/blogList.js")

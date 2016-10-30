@@ -13,15 +13,16 @@ block content
                     li.nav-item ABOUT
                 a(href="/")
                     li.nav-item CONNECT
-            .login-regist-container
-                a(href="/login")
-                    .sim-box
-                        .i
-                        span Sign in
-                a(href="/regist")
-                    .sim-box
-                        .i
-                        span Sign up
+            - if ( loginStatus != 1)
+                .login-regist-container
+                    a(href="/login")
+                        .sim-box
+                            .i
+                            span Sign in
+                    a(href="/regist")
+                        .sim-box
+                            .i
+                            span Sign up
             .search-container
                 .ui.search
                     .ui.icon.input

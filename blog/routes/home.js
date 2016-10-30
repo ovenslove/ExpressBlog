@@ -25,33 +25,10 @@ var blogSchema  = new mongoose.Schema(blogsSchemaConf);
 var blogModel = db.model('blog',blogSchema);
 /*-------------------数据库相关----------------------------*/
 /*-------------------权限认证相关----------------------------*/
-/*var passport = require('passport')
-    , LocalStrategy = require('passport-local').Strategy;
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        userModel.findOne({ username: username }, function(err, user) {
-            if (err) { return done(err); }
-            if (!user) {
-                return done(null, false, { message: '用户名不存在.' });
-            }
-            /!*  console.log('----------------------------------'+user.password);
-             console.log('----------------------------------'+md5(password));*!/
-            if (user.password != md5(password)) {
-                return done(null, false, { message: '密码不匹配.' });
-            }
-            return done(null, user);
-        });
-    }
-));
+var passport = require('passport')
 router.use(session({ secret: 'keyboard cat' , resave: false, saveUninitialized: false}));
 router.use(passport.initialize());
 router.use(passport.session());
-passport.serializeUser(function(user, done) {
-    done(null, user);
-});
-passport.deserializeUser(function(user, done) {
-    done(null, user);
-});*/
 /*-------------------权限认证相关----------------------------*/
 /*--------------------------------------------------------*/
 
@@ -96,20 +73,6 @@ router.get('/home/oneWord', function(req, res, next) {
 });
 
 
-/*文章列表*/
-router.get('/home/blogList',function (req, res, next) {
-    var data={
-        'title':'博客列表'
-    };
-    blogModel.find({}).sort({'addTime':-1}).limit(10).skip(0).exec(function(err,blogs){
-        data.list=blogs;
-        // res.send(data);
-        res.render('blogList', data);
-    });
-
-
-    // res.render('blogList', data);
-});
 /*文章分类*/
 router.get('/home/category',function (req, res, next) {
     var data={
