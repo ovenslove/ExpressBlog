@@ -44,9 +44,9 @@ router.get('/home/user',function (req, res, next) {
 /*修改基本信息*/
 router.post('/home/user/excBaseInfo',function (req, res, next) {
     var username=req.session.passport.user.username;
-    var ddd=req.body;
+    var data=req.body;
     userModel.findOne({username:username},function (err,user) {
-        userModel.update({_id:user._id},{$set:ddd},function(err){
+        userModel.update({_id:user._id},{$set:data},function(err){
             res.json({
                 status:1,
                 type:1,

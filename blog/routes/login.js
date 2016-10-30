@@ -75,6 +75,14 @@ router.get('/login', function(req, res, next) {
     }
 });
 
+router.get('/logout', function(req, res){
+    req.logout();
+    res.json({
+        status:1,
+        directUrl:'/'
+    })
+});
+
 
 /*表单提交请求*/
 router.post('/login', passport.authenticate('local', { successRedirect: '/home', failureRedirect: '/login' }));

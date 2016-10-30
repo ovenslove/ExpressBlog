@@ -45,7 +45,6 @@ router.get('/home/addBlogs', function (req, res, next) {
         res.redirect('/login');
 
     }
-
 });
 
 router.post('/home/addBlogs', function (req, res, next) {
@@ -60,66 +59,70 @@ router.post('/home/addBlogs', function (req, res, next) {
     var blogModel = db.model('blog', blogSchema);
 
     // var username="1905997838@qq.com";
-    var username=req.session.passport.user.nickname;
-    var timeid=new Date().getTime();
-    var blogData = {
-        blogId: timeid,
-        title: req.body.blogTitle,
-        postStatu:req.body.postStatus,
-        author: username,
-        intr: req.body.blogIntr,
-        addTime: new Date(),
-        updateTime: new Date(),
-        mark: req.body.markGroup.split(','),
-        content: req.body.blogContent,
-        viewCount:0,
-        priseCount:0
-    };
+    var  username=req.session.passport.user.username;
+    userModel.findOne({username:username},function (err,user) {
+        /*user*/
+        var timeid=new Date().getTime();
+        var blogData = {
+            blogId: timeid,
+            title: req.body.blogTitle,
+            postStatu:req.body.postStatus,
+            author: user.nickname,
+            intr: req.body.blogIntr,
+            addTime: new Date(),
+            updateTime: new Date(),
+            mark: req.body.markGroup.split(','),
+            content: req.body.blogContent,
+            viewCount:0,
+            priseCount:0
+        };
 
-    if(req.body.imageType==1){
-        var paths=path.normalize('/images/blogPreviewImages/');
+        if(req.body.imageType==1){
+            var paths=path.normalize('/images/blogPreviewImages/');
 
-        var imgData=req.body.previewImageUrl;
-        var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
-        var dataBuffer = new Buffer(base64Data, 'base64');
-        var name='image-'+timeid+'.png';
-        var logoUrl=paths+name;
-        fs.writeFile('public'+logoUrl, dataBuffer, function(err) {
-            if(err){
-                res.send(err);
-            }else{
-                blogData['imgUrl']=logoUrl;
-                var blogEntity = new blogModel(blogData);
-                if (blogEntity.save()) {
-                    res.json({
-                       status:1,
-                        message:'ok'
-                    });
-                } else {
-                    res.json({
-                        status:0,
-                        message:'error'
-                    });
+            var imgData=req.body.previewImageUrl;
+            var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
+            var dataBuffer = new Buffer(base64Data, 'base64');
+            var name='image-'+timeid+'.png';
+            var logoUrl=paths+name;
+            fs.writeFile('public'+logoUrl, dataBuffer, function(err) {
+                if(err){
+                    res.send(err);
+                }else{
+                    blogData['imgUrl']=logoUrl;
+                    var blogEntity = new blogModel(blogData);
+                    if (blogEntity.save()) {
+                        res.json({
+                            status:1,
+                            message:'ok'
+                        });
+                    } else {
+                        res.json({
+                            status:0,
+                            message:'error'
+                        });
+                    }
+                    // res.json(blogData);
                 }
-                // res.json(blogData);
-            }
-        });
+            });
 
-    }else {
-        blogData.imgUrl=req.body.previewImageUrl;
-        var blogEntity = new blogModel(blogData);
-        if (blogEntity.save()) {
-            res.json({
-                status:1,
-                message:'ok'
-            });
-        } else {
-            res.json({
-                status:0,
-                message:'error'
-            });
+        }else {
+            blogData.imgUrl=req.body.previewImageUrl;
+            var blogEntity = new blogModel(blogData);
+            if (blogEntity.save()) {
+                res.json({
+                    status:1,
+                    message:'ok'
+                });
+            } else {
+                res.json({
+                    status:0,
+                    message:'error'
+                });
+            }
         }
-    }
+    });
+
 
 });
 
