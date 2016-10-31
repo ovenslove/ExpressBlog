@@ -22,7 +22,7 @@ block homecontent
                     textarea.ndCheck(rows='2',name="blogIntr",placeholder="Simply tell us something") #{blog.intr || '' }
                 .inline.field
                     .ui.toggle.checkbox
-                        -if(blog.postStatu)
+                        -if(blog.postStatus)
                             input.ndCheck.lockStatus(type='checkbox',name='postStatus',checked)
                         -else
                             input.ndCheck.lockStatus(type='checkbox',name='postStatus')
