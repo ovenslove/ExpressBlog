@@ -31,8 +31,8 @@ router.get('/home/blogList',function (req, res, next) {
     if(req.isAuthenticated()){
         var  userId=req.session.passport.user._id;
 
-        blogModel.count({blogId:userId},function (err ,count) {
-            blogModel.find({blogId:userId}).sort({'addTime':-1}).limit(limitNum).skip(0).exec(function(err,blogs){
+        blogModel.count({blogId:userId,lockStatus:false},function (err ,count) {
+            blogModel.find({blogId:userId,lockStatus:false}).sort({'addTime':-1}).limit(limitNum).skip(0).exec(function(err,blogs){
                 var pages=Math.ceil(count / limitNum);
                 data.list=blogs;
                 data.pages=pages;
@@ -57,8 +57,8 @@ router.get('/home/blogList/:id',function (req, res, next) {
     if(req.isAuthenticated()){
         var  userId=req.session.passport.user._id;
 
-        blogModel.count({blogId:userId},function (err ,count) {
-            blogModel.find({blogId:userId}).sort({'addTime':-1}).limit(limitNum).skip(page*limitNum).exec(function(err,blogs){
+        blogModel.count({blogId:userId,lockStatus:false},function (err ,count) {
+            blogModel.find({blogId:userId,lockStatus:false}).sort({'addTime':-1}).limit(limitNum).skip(page*limitNum).exec(function(err,blogs){
                 var pages=Math.ceil(count / limitNum);
                 data.list=blogs;
                 data.pages=pages;

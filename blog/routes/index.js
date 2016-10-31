@@ -32,9 +32,14 @@ router.get('/', function(req, res, next) {
 
     /*根据schema生成模型*/
     var blogModel = db.model('blog',blogSchema);
-    var username=req.session.passport || false;
+
+    try {
+        var username=req.session.passport.user || false;
+    }catch(err){
+
+    }
     /*带limit()*/
-    blogModel.find({}).sort({'addTime':-1}).limit(20).skip(0).exec(function(err,blogs){
+    blogModel.find({postStatus:true}).sort({'addTime':-1}).limit(20).skip(0).exec(function(err,blogs){
         data.list=blogs;
         data.loginStatus=username?1:0;
         res.render('index', data);

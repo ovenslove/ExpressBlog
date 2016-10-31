@@ -15,6 +15,15 @@ var userSchemaConf = require('../schema/userSchema.js');
 var userSchema = new mongoose.Schema(userSchemaConf);
 /*根据schema生成模型*/
 var userModel = db.model('user', userSchema);
+
+/*引入blogsSchema配置文件*/
+var blogsSchemaConf = require('../schema/blogsSchema.js');
+/*生成一个schema*/
+var blogSchema = new mongoose.Schema(blogsSchemaConf);
+/*根据schema生成模型*/
+var blogModel = db.model('blog', blogSchema);
+
+
 /*-------------------数据库相关----------------------------*/
 /*-------------------权限认证相关----------------------------*/
 var passport = require('passport');
@@ -34,7 +43,8 @@ passport.deserializeUser(function (user, done) {
 /*文章列表*/
 router.get('/home/addBlogs', function (req, res, next) {
     var data = {
-        'title': '新建博客'
+        'title': '新建博客',
+        'blog':{}
     };
 
     // console.log('------------------------------------' + req.isAuthenticated() + '------------------------------------------');
@@ -48,37 +58,33 @@ router.get('/home/addBlogs', function (req, res, next) {
 });
 
 router.post('/home/addBlogs', function (req, res, next) {
-    var mongoose = require('mongoose');
-//创建一个数据库连接
-    var db = mongoose.createConnection('localhost', 'blog');
-    /*引入blogsSchema配置文件*/
-    var blogsSchemaConf = require('../schema/blogsSchema.js');
-    /*生成一个schema*/
-    var blogSchema = new mongoose.Schema(blogsSchemaConf);
-    /*根据schema生成模型*/
-    var blogModel = db.model('blog', blogSchema);
-
     // var username="1905997838@qq.com";
     var  username=req.session.passport.user.username;
     var  userId=req.session.passport.user._id;
     userModel.findOne({username:username},function (err,user) {
         /*user*/
         var timeid=new Date().getTime();
+        var actionType=req.body.actionType;
+        var _id=req.body._id;
         var blogData = {
             blogId: userId,
             title: req.body.blogTitle,
-            postStatu:req.body.postStatus,
+            postStatus:req.body.postStatus,
             author: user.nickname,
             intr: req.body.blogIntr,
-            addTime: new Date(),
-            updateTime: new Date(),
+/*            addTime: new Date(),
+            updateTime: new Date(),*/
             mark: req.body.markGroup.split(','),
             content: req.body.blogContent,
             viewCount:0,
-            priseCount:0
+            priseCount:0,
+            lockStatus:false
         };
+        console.log(blogData);
+        console.log(actionType)
+        console.log(_id)
 
-        if(req.body.imageType==1){
+      if(req.body.imageType==1){
             var paths=path.normalize('/images/blogPreviewImages/');
 
             var imgData=req.body.previewImageUrl;
@@ -91,18 +97,35 @@ router.post('/home/addBlogs', function (req, res, next) {
                     res.send(err);
                 }else{
                     blogData['imgUrl']=logoUrl;
-                    var blogEntity = new blogModel(blogData);
-                    if (blogEntity.save()) {
-                        res.json({
-                            status:1,
-                            message:'ok'
+                    var mongoStatus;
+                    if(actionType == 1){
+                        console.log("000000000000000------")
+                        /*更新数据*/
+                        blogData.updateTime=new Date();
+                        mongoStatus=blogModel.update({_id:_id},{$set:blogData},function (err) {
+                            console.log("1111111------")
+                            res.json({
+                                status:1,
+                                message:'Update Success!'
+                            });
                         });
-                    } else {
-                        res.json({
-                            status:0,
-                            message:'error'
-                        });
+                    }else {
+                        blogData.addTime=new Date();
+                        var blogEntity = new blogModel(blogData);
+                        if (blogEntity.save()) {
+                            res.json({
+                                status:1,
+                                message:'Add Success!'
+                            });
+                        } else {
+                            res.json({
+                                status:0,
+                                message:'Add Error'
+                            });
+                        }
                     }
+                    console.log(mongoStatus);
+
                     // res.json(blogData);
                 }
             });
@@ -126,5 +149,25 @@ router.post('/home/addBlogs', function (req, res, next) {
 
 
 });
+
+/*文章修改列表*/
+router.get('/home/addBlogs/edit/:id', function (req, res, next) {
+    var data = {
+        'title': '修改博客'
+    };
+    if (req.isAuthenticated()) {
+        var _id=req.params.id;
+        blogModel.findOne({
+            _id:_id
+        },function (err, blog) {
+            data.blog=blog;
+            res.render('addBlogs', data);
+        });
+    } else {
+        res.redirect('/login');
+
+    }
+});
+
 
 module.exports = router;

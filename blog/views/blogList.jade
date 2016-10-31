@@ -1,6 +1,7 @@
 extends layout/homeLayout
 
 block homecontent
+    link(rel='stylesheet',type="text/css", href='/css/blogList.css')
     .home-box
         .ui.breadcrumb.breadcrumb-nav
             a(href="/").section MainPage
@@ -19,6 +20,7 @@ block homecontent
                         th Introduce
                         th Mark
                         th AddTime
+                        th Publish
                         th opts
                 tbody
                     each  val,key in list
@@ -31,6 +33,12 @@ block homecontent
                             td(style="max-width:300px;") #{val.intr}
                             td #{val.mark.join()}
                             td #{new Date(val.addTime).toLocaleString()}
+                            -if(val.postStatus)
+                                td
+                                    span(style="color:green;") Published
+                            -else
+                                td
+                                    span(style="color:red;") UnPublish
                             td(style="width:20px;text-align:center;")
                                 .ui.right.pointing.dropdown.icon.button
                                     i.settings.icon
@@ -40,34 +48,40 @@ block homecontent
                                             |  operation
                                         .item
                                             .ui.red.empty.circular.label
-                                            | Edit
+                                            a.blogs-ActionBtn(href='/home/addBlogs/edit/'+val._id) Edit
                                         .item
                                             .ui.blue.empty.circular.label
-                                            | Delete
+                                            a.blogs-ActionBtn(href='/home/blogAction/delete/'+val._id) Delete
                                         .item
                                             .ui.black.empty.circular.label
-                                            | Stop
+                                            -if(val.postStatus)
+                                                a.blogs-ActionBtn(href='/home/blogAction/unPublish/'+val._id,style='color:red') UnPublish
+                                            -else
+                                                a.blogs-ActionBtn(href='/home/blogAction/publish/'+val._id,style='color:green') Publish
             .pagination-container
-                ul.pagination-listGroup
-                    -if (pages <= 10)
-                        - for (var x = 0; x < pages; x++)
-                            - if ( x==curPage )
-                                li.pagination-listItem.activePage
-                                    a(href='/home/blogList/'+(x+1))=x+1
-                            - else
-                                li.pagination-listItem
-                                    a(href='/home/blogList/'+(x+1))=x+1
-                    -else
-                        li.pagination-listItem
-                            a(href='/home/blogList/1') Front
-                        - for (var x = 0; x < pages; x++)
-                            - if ( x==curPage )
-                                li.pagination-listItem.activePage
-                                    a(href='/home/blogList/'+(x+1))=x + 1
-                            - else
-                                li.pagination-listItem
-                                    a(href='/home/blogList/'+(x+1))=x + 1
-                        li.pagination-listItem
-                            a(href='/home/blogList/'+(pages)) End
+                -if(pages > 0)
+                    ul.pagination-listGroup
+                        -if (pages <= 1)
+                            - for (var x = 0; x < pages; x++)
+                                - if ( x==curPage )
+                                    li.pagination-listItem.activePage
+                                        a(href='/home/blogList/'+(x+1))=x+1
+                                - else
+                                    li.pagination-listItem
+                                        a(href='/home/blogList/'+(x+1))=x+1
+                        -else
+                            li.pagination-listItem
+                                a(href='/home/blogList/1') Front
+                            - for (var x = 0; x < pages; x++)
+                                - if ( x==curPage )
+                                    li.pagination-listItem.activePage
+                                        a(href='/home/blogList/'+(x+1))=x + 1
+                                - else
+                                    li.pagination-listItem
+                                        a(href='/home/blogList/'+(x+1))=x + 1
+                            li.pagination-listItem
+                                a(href='/home/blogList/'+(pages)) End
+                -else
+                    span 暂无数据
 
     script(src="/js/blogList.js")

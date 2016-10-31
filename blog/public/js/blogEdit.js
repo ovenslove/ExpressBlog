@@ -18,7 +18,7 @@ editor.config.uploadHeaders = {
 // editor.config.hideLinkImg = true;
 
 // 表情显示项
-editor.config.emotionsShow = 'value';
+/*editor.config.emotionsShow = 'value';
 editor.config.emotions = {
     'default': {
         title: '默认',
@@ -53,7 +53,7 @@ editor.config.emotions = {
             }
         ]
     }
-};
+};*/
 
 // 插入代码时的默认语言
 // editor.config.codeDefaultLang = 'html'
@@ -119,6 +119,14 @@ editor.onchange = function () {
 
 editor.create();
 
+/*初始化内容*/
+var blog=$("#blogContent").val();
+console.log(blog);
+if( blog.content != '' ){
+    editor.$txt.html(blog);
+}else{
+    editor.$txt.html('<p>Start to make your  blog !</p>');
+}
 
 $('.ui.checkbox input').checkbox();
 $('.dropdown')
@@ -152,7 +160,7 @@ $(function () {
             postobj['imageType']=0; /*标记照片类型位互联网链接*/
             $image.attr({src:$(this).val()});
             $image[0].onload=function () {
-                $("#addBlogsPreviewImageShowBox").show();
+                $(".addBlogsPreviewImageShowBox").show();
 
             };
         }else {
@@ -168,14 +176,15 @@ $(function () {
             $(".ndCheck").each(function () {
 
                 var name=$(this).attr('name');
-                if(name=='lockStatus'){
+                if(name=='postStatus'){
                     var val=$(this).prop("checked");
                 }else {
                     var val=$(this).val();
                 }
                 postobj[name]=val;
             });
-
+            postobj['actionType']=$("input[name=actionType]").val();
+            postobj['_id']=$("input[name=_id]").val();
             console.log(postobj);
             /*开始提交表单*/
             $.post('/home/addBlogs',postobj,function (data) {
@@ -188,7 +197,7 @@ $(function () {
         }
     });
 
-    var $image = $('#addBlogsPreviewImageShow');
+    var $image = $('.addBlogsPreviewImageShow');
     $image.cropper({
         aspectRatio: 9 / 9,
         autoCropArea: 1,
@@ -219,7 +228,7 @@ $(function () {
             var imgdata=this.result;
             $image.cropper('replace', imgdata);
 
-            $("#addBlogsPreviewImageShowBox").slideDown();
+            $(".addBlogsPreviewImageShowBox").slideDown();
             $("input[name=previewImageUrl]").attr({
                 disabled:"disabled"
             })
@@ -228,7 +237,7 @@ $(function () {
     /*网络资源*/
     $("#addBlogsPreviewImageUrl").on("click",function () {
         $("input[name=previewImageUrl]").removeAttr("disabled");
-        $("#addBlogsPreviewImageShow").removeClass('cropper-hidden').attr({src:''});
+        $(".addBlogsPreviewImageShow").removeClass('cropper-hidden').attr({src:''});
         $(".cropper-container").remove();
     });
 

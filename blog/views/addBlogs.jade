@@ -16,33 +16,48 @@ block homecontent
             form.ui.form
                 .field
                     label Blog Title
-                    input.ndCheck(type='text',name="blogTitle",placeholder="You need a good title")
+                    input.ndCheck(type='text',name="blogTitle",placeholder="You need a good title",value="#{blog.title || '' }")
                 .field
                     label Blog Introduce
-                    textarea.ndCheck(rows='2',name="blogIntr",placeholder="Simply tell us something")
+                    textarea.ndCheck(rows='2',name="blogIntr",placeholder="Simply tell us something") #{blog.intr || '' }
                 .inline.field
                     .ui.toggle.checkbox
-                        input.ndCheck.lockStatus(type='checkbox',name='postStatus')
+                        -if(blog.postStatu)
+                            input.ndCheck.lockStatus(type='checkbox',name='postStatus',checked)
+                        -else
+                            input.ndCheck.lockStatus(type='checkbox',name='postStatus')
                         label Publish to the home page
                 .field
                     label Blog PreviewImage
-                    input(type='url',name='previewImageUrl',placeholder="Image Url (Allow the chain)",style="width:calc(100% - 100px)")
+                    - if ( blog.imgUrl !='')
+                        input(type='url',name='previewImageUrl',placeholder="Image Url (Allow the chain)",style="width:calc(100% - 100px)",disabled)
+                    - else
+                        input(type='url',name='previewImageUrl',placeholder="Image Url (Allow the chain)",style="width:calc(100% - 100px)")
                     .ui.dropdown.label.imgUrlTtype ImgUrl
                         i.dropdown.icon
                         .menu
                             .item#addBlogsPreviewImageUrl network
                             .item Local
                                 input#addBlogsPreviewImage(type="file")
-                    #addBlogsPreviewImageShowBox
-                        img#addBlogsPreviewImageShow
+                    - if ( blog.imgUrl != undefined)
+                        .addBlogsPreviewImageShowBox(style="display:block;")
+                            img.addBlogsPreviewImageShow(src=blog.imgUrl)
+                    - else
+                        .addBlogsPreviewImageShowBox
+                            img.addBlogsPreviewImageShow
                 .field
                     label Blog Marks
-                    input.ndCheck(type='text', name='markGroup',placeholder="Html , Css , Node....")
+                    input.ndCheck(type='text', name='markGroup',placeholder="Html , Css , Node....",value="#{blog.mark || '' }")
                 div.editor-container
                     div#editor-box
-                input.ndCheck#blogContent(type="hidden",name="blogContent")
+                input.ndCheck#blogContent(type="hidden",name="blogContent",value="#{blog.content || ''}")
                 .positive.ui.button#submit-btn
                     | SUBMIT
+                -if(blog.title != undefined)
+                    input(type="hidden",name="actionType",value="1")
+                    input(type="hidden",name="_id",value=blog._id)
+                -else
+                    input(type="hidden",name="actionType",value="0")
 
             div.editor-markdown-container
 

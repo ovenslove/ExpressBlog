@@ -28,7 +28,9 @@ var data={
 router.get('/blogs/:id', function(req, res, next) {
 
     var _id=req.params.id;
-    var username=req.session.passport || false;
+    try {
+        var username=req.session.passport.user || false;
+    }catch(err){}
     var blogModel = db.model('blog',blogSchema);
     blogModel.find({'_id':_id},function (err, blogs) {
     data.blog=blogs[0];

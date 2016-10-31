@@ -10,6 +10,7 @@ var blogSchema = {
     content:String,     //正文
     viewCount:Number,   //浏览次数
     priseCount:Number,  //点赞数
-    postStatu:Boolean    //推送状态（发布、不发布）
+    postStatus:Boolean,    //推送状态（发布、不发布）
+    lockStatus:Boolean    //锁状态（正常态和删除态）
 }
 module.exports=blogSchema;
