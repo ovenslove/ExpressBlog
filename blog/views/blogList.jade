@@ -20,6 +20,8 @@ block homecontent
                         th Introduce
                         th Mark
                         th AddTime
+                        th View
+                        th Prise
                         th Publish
                         th opts
                 tbody
@@ -33,6 +35,8 @@ block homecontent
                             td(style="max-width:300px;") #{val.intr}
                             td #{val.mark.join()}
                             td #{new Date(val.addTime).toLocaleString()}
+                            td #{val.viewCount}
+                            td #{val.priseCount}
                             -if(val.postStatus)
                                 td
                                     span(style="color:green;") Published

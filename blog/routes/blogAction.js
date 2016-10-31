@@ -78,6 +78,34 @@ router.get('/home/blogAction/unPublish/:id',function (req, res, next) {
 
 });
 
+/*浏览次数统计*/
+
+router.get('/home/blogAction/viewCount/:id',function (req, res, next) {
+    var data={
+    };
+    var _id=req.params.id;
+
+    blogModel.update({_id:_id},{$inc:{viewCount:1}},function (err) {
+        res.json({
+            status:1
+        })
+    })
+
+});
+/*浏览次数统计*/
+
+router.get('/home/blogAction/priceCount/:id',function (req, res, next) {
+    var data={
+    };
+    var _id=req.params.id;
+
+    blogModel.update({_id:_id},{$inc:{priseCount:1}},function (err) {
+        res.json({
+            status:1
+        })
+    })
+
+});
 
 
 module.exports = router;

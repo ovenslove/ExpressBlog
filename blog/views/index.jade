@@ -21,11 +21,19 @@ block content
                     .content
                         a.header(href=" /blogs/#{val._id}" ) #{val.title}
                         .meta
-                            span #{val.intr}
-                        .description
-                            p
+                            span
+                                b Author:
+                                |   #{val.author}
+                                b(style="margin-left:10px;") Time:
+                                |   #{new Date(val.addTime).toLocaleDateString()}
+                        .description(style="height: calc(100% - 85px);")
+                            p  #{val.intr}
                         .extra
-                            | #{val.info}
+                            i.unhide.icon
+                            | #{val.viewCount}
+                            | &emsp;
+                            i.icon.thumbs.up
+                            | #{val.priseCount}
     .side-box
         ul
             a(href="https://github.com/",target="_blanck")
