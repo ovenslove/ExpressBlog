@@ -19,8 +19,6 @@ router.use(passport.initialize());
 router.use(passport.session());
 /*-------------------权限认证相关----------------------------*/
 
-
-
 /* GET home page. */
 var data={
   'title':'首页',
@@ -39,7 +37,7 @@ router.get('/', function(req, res, next) {
 
     }
     /*带limit()*/
-    blogModel.find({postStatus:true}).sort({'addTime':-1}).limit(20).skip(0).exec(function(err,blogs){
+    blogModel.find({postStatus:true,lockStatus:false}).sort({'addTime':-1}).limit(20).skip(0).exec(function(err,blogs){
         data.list=blogs;
         data.loginStatus=username?1:0;
         res.render('index', data);

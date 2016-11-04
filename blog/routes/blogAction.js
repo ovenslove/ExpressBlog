@@ -41,6 +41,48 @@ router.get('/home/blogAction/delete/:id',function (req, res, next) {
 
 });
 
+/*文章删除功能-真实删除*/
+/*
+ * 从数据库中删除，不可找回
+ *
+ * 垃圾桶删除则为删除真实数据*/
+router.get('/home/blogAction/trueDelete/:id',function (req, res, next) {
+    var data={
+    };
+    var _id=req.params.id;
+    if(req.isAuthenticated()){
+        blogModel.remove({_id:_id},function (err) {
+            if(err){
+                console.log('delete error');
+            }else {
+                res.redirect('/home/trash');
+            }
+        })
+
+    }else {
+        res.redirect('/login');
+    }
+
+});
+/*文章恢复功能*/
+/*
+ * 将lockStatu属性设置为false,即解锁文章
+ * 垃圾桶删除则为删除真实数据*/
+router.get('/home/blogAction/recovery/:id',function (req, res, next) {
+    var data={
+    };
+    var _id=req.params.id;
+    if(req.isAuthenticated()){
+        blogModel.update({_id:_id},{$set:{lockStatus:false}},function (err) {
+            res.redirect('/home/trash');
+        })
+
+    }else {
+        res.redirect('/login');
+    }
+
+});
+
 /*文章发布功能*/
 /*
 * 文章发布状态为postStatu
@@ -77,6 +119,7 @@ router.get('/home/blogAction/unPublish/:id',function (req, res, next) {
     }
 
 });
+
 
 /*浏览次数统计*/
 

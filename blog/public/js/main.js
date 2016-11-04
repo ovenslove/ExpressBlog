@@ -2361,6 +2361,10 @@ window.onload=function () {
     $(".content").html(htmldecode( $(".content-area").html()));
 
 };
+$('.ui.checkbox')
+    .checkbox()
+;
+$(".ui.right.pointing").dropdown();
 $(function () {
     var verifiCodeNum;
     function getNum() {

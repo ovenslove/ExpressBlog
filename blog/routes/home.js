@@ -87,13 +87,15 @@ router.get('/home/chars',function (req, res, next) {
     };
     res.render('chars', data);
 });
-/*垃圾桶*/
+/*
+/!*垃圾桶*!/
 router.get('/home/trush',function (req, res, next) {
     var data={
         'title':'回收站'
     };
     res.render('trush', data);
 });
+*/
 
 
 

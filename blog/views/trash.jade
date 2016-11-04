@@ -1,7 +1,7 @@
 extends layout/homeLayout
 
 block homecontent
-    link(rel='stylesheet',type="text/css", href='/css/blogList.css')
+    link(rel='stylesheet',type="text/css", href='/css/trash.css')
     .home-box
         .ui.breadcrumb.breadcrumb-nav
             a(href="/").section MainPage
@@ -10,7 +10,7 @@ block homecontent
                 .divider  /
             .active.section BlogList
         article.article
-            h2 Blog List
+            h2 Blog List -InTrush
             table.ui.celled.table.selectable
                 thead
                     tr
@@ -22,7 +22,7 @@ block homecontent
                         th AddTime
                         th View
                         th Prise
-                        th Publish
+                        th Status
                         th opts
                 tbody
                     each  val,key in list
@@ -37,12 +37,12 @@ block homecontent
                             td #{new Date(val.addTime).toLocaleString()}
                             td #{val.viewCount}
                             td #{val.priseCount}
-                            -if(val.postStatus)
+                            -if(val.lockStatus)
                                 td
-                                    span(style="color:green;") Published
+                                    span(style="color:red;") Deleted
                             -else
                                 td
-                                    span(style="color:red;") UnPublish
+                                    span(style="color:green;") UnDeleted
                             td(style="width:20px;text-align:center;")
                                 .ui.right.pointing.dropdown.icon.button
                                     i.settings.icon
@@ -52,16 +52,11 @@ block homecontent
                                             |  operation
                                         .item
                                             .ui.blue.empty.circular.label
-                                            a.blogs-ActionBtn(href='/home/addBlogs/edit/'+val._id) Edit
-                                        .item
-                                            .ui.red.empty.circular.label
-                                            a.blogs-ActionBtn(href='/home/blogAction/delete/'+val._id) Delete
+                                            a.blogs-ActionBtn(href='/home/blogAction/trueDelete/' + val._id,style='color:red') TrueDelete
                                         .item
                                             .ui.black.empty.circular.label
-                                            -if(val.postStatus)
-                                                a.blogs-ActionBtn(href='/home/blogAction/unPublish/'+val._id,style='color:red') UnPublish
-                                            -else
-                                                a.blogs-ActionBtn(href='/home/blogAction/publish/'+val._id,style='color:green') Publish
+                                            a.blogs-ActionBtn(href='/home/blogAction/recovery/' + val._id,style='color:green') Recovery
+
             .pagination-container
                 -if(pages > 0)
                     ul.pagination-listGroup
@@ -69,23 +64,22 @@ block homecontent
                             - for (var x = 0; x < pages; x++)
                                 - if ( x==curPage )
                                     li.pagination-listItem.activePage
-                                        a(href='/home/blogList/'+(x+1))=x+1
+                                        a(href='/home/trash/' + (x + 1))=x + 1
                                 - else
                                     li.pagination-listItem
-                                        a(href='/home/blogList/'+(x+1))=x+1
+                                    a(href='/home/trash/' + (x + 1))=x + 1
                         -else
                             li.pagination-listItem
-                                a(href='/home/blogList/1') Front
+                                a(href='/home/trash/1') Front
                             - for (var x = 0; x < pages; x++)
                                 - if ( x==curPage )
                                     li.pagination-listItem.activePage
-                                        a(href='/home/blogList/'+(x+1))=x + 1
+                                        a(href='/home/trash/' + (x + 1))=x + 1
                                 - else
                                     li.pagination-listItem
-                                        a(href='/home/blogList/'+(x+1))=x + 1
-                            li.pagination-listItem
-                                a(href='/home/blogList/'+(pages)) End
+                                        a(href='/home/trash/' + (x + 1))=x + 1
+                                    li.pagination-listItem
+                                        a(href='/home/trash/' + (pages)) End
                 -else
                     span 暂无数据
-
-    script(src="/js/blogList.js")
+    script(src="/js/trash.js")

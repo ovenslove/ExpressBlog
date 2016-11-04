@@ -16,6 +16,7 @@ var login = require('./routes/login');
 var regist = require('./routes/regist');
 var home = require('./routes/home');
 var blogList = require('./routes/blogList');
+var trash = require('./routes/trash');
 var blogAction = require('./routes/blogAction');
 
 /*定义app*/
@@ -46,6 +47,7 @@ app.use('/', login);
 app.use('/', regist);
 app.use('/', home);
 app.use('/', blogList);
+app.use('/', trash);
 app.use('/', blogAction);
 
 
