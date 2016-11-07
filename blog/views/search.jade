@@ -1,0 +1,25 @@
+extends layout/layout
+
+block content
+    link(rel='stylesheet',type="text/css", href='/bower_components/semantic/dist/semantic.min.css')
+    link(rel='stylesheet',type="text/css", href='/css/base.css')
+    link(rel='stylesheet',type="text/css", href='/css/search.css')
+    link(rel='stylesheet',type="text/css", href='/bower_components/nprogress/nprogress.css')
+    script(src="/bower_components/nprogress/nprogress.js")
+    script(src="/bower_components/jquery/dist/jquery.min.js")
+    script(src="/bower_components/semantic/dist/semantic.min.js")
+    script NProgress.start();
+    include layout/header
+
+    script NProgress.set(0.2)
+    .main-box
+        .search-box
+            .field.inline.search-container
+                input#search-input(type="text",placeholder="something will show",name="search",value="")
+                .ui.submit.button#submit-btn Search
+    include layout/footer
+
+    script
+        | $(function(){NProgress.done();})
+    script(src="/js/jquery.mousewheel.js")
+    script(src="/js/search.js")
