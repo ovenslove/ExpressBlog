@@ -28,7 +28,10 @@ block content
                             .image.image-box
                                 img(src=val.imgUrl)
                             .content
-                                a.header(href=" /blogs/"+val._id ) #{val.title}
+                                -if(val.blogUrl =='' || val.blogUrl==undefined)
+                                    a.header(href="/blogs/" + val._id ) #{val.title}
+                                -else
+                                    a.header(href=val.blogUrl ) #{val.title}
                                 .meta
                                     span
                                         b Author:

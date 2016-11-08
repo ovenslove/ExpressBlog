@@ -2,7 +2,16 @@ var express = require('express');
 var router = express.Router();
 var fetch = require('node-fetch');
 var cheerio = require('cheerio')
+var mongoose = require('mongoose');
 
+//创建一个数据库连接
+var db = mongoose.createConnection('localhost', 'blog');
+/*引入blogsSchema配置文件*/
+var blogsSchemaConf = require('../schema/blogsSchema.js');
+/*生成一个schema*/
+var blogSchema = new mongoose.Schema(blogsSchemaConf);
+/*根据schema生成模型*/
+var blogModel = db.model('blog', blogSchema);
 
 router.get('/pachong', function(req, res, next) {
     var url = "http://qianduan.guru/";
@@ -23,6 +32,7 @@ router.get('/pachong', function(req, res, next) {
             var author=$(".post-preview").eq(i).find('span.post-author').text() || '前端外刊评论';
             var intr=$(".post-preview").eq(i).find('div.post-content-preview').text();
             var data = {
+                blogType:1,
                 title: title,
                 blogUrl:blogUrl,
                 imgUrl:imgUrl,
@@ -37,10 +47,29 @@ router.get('/pachong', function(req, res, next) {
                 addTime:new Date()
 
             }
+
             datas.push(data);
 
         }
-        res.json(datas);
+        var tempNum=0;
+        for (var i in datas){
+            var blogEntity = new blogModel(datas[i]);
+            if(blogEntity.save()){
+                tempNum++;
+            }
+        }
+        if (tempNum == 10) {
+            res.json({
+                status:1,
+                message:'ok'
+            });
+        } else {
+            res.json({
+                status:0,
+                message:'error'
+            });
+        }
+        // res.json(datas);
 
     });
 });
