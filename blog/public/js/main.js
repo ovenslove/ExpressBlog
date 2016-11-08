@@ -2355,6 +2355,33 @@ $(function () {
         }
         $.post('/search',postData,function (data) {
             console.log(data);
+            $.each(data.data,function (key,val) {
+               console.log(val);
+                var tpls='' +
+                    '<div class="ui items sim-blog"> ' +
+                    '<div class="item"> ' +
+                    '<div class="image image-box"> ' +
+                    '<img src="'+val.imgUrl+'"> ' +
+                    '</div> ' +
+                    '<div class="content">' +
+                    '<a href=" /blogs/'+val._id+'" class="header">'+val.title+'</a> ' +
+                    '<div class="meta">' +
+                    '<span><b>Author:</b>'+val.author+'<b style="margin-left:10px;">Time:</b>'+val.addTime+'</span> ' +
+                    '</div> ' +
+                    '<div style="height: calc(100% - 85px);" class="description"> ' +
+                    '<p>'+val.content+'</p> ' +
+                    '</div>' +
+                    ' <div class="extra">' +
+                    '<i class="unhide icon"></i>2  <i class="icon thumbs up"></i>0' +
+                    '</div> ' +
+                    '</div> ' +
+                    '</div> ' +
+                    '</div>';
+                $(".search-listContainer").append(tpls);
+
+            });
+
+            // $(".search-listContainer").append(tpls);
             /*
             将数据列表显示出来
             * {

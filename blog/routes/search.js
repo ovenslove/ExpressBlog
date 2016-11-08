@@ -60,6 +60,7 @@ router.post('/search', function(req, res, next) {
         var data={
             status:1,
             message:'ok',
+            search:str,
             data:blogs
         }
         res.json(data);
