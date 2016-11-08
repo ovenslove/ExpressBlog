@@ -46,13 +46,13 @@ router.get('/search/:search', function(req, res, next) {
     var searchData={
         $or:[
             {
-                title:new RegExp(str,'g')
+                title:new RegExp(str,'igm')
             },
             {
-                content:new RegExp(str,'g')
+                content:new RegExp(str,'igm')
             },
             {
-                intr:  new RegExp(str,'g')
+                intr:  new RegExp(str,'igm')
             }
         ],
         $and:[
