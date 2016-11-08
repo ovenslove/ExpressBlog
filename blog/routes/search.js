@@ -19,11 +19,7 @@ router.use(passport.session());
 /*-------------------权限认证相关----------------------------*/
 
 /* GET home page. */
-var data={
-    'title':'Search',
-    'webSiteName':'ExpressBlog',
-    'list':[]
-}
+
 /*57ffb8c2328981299c302367*/
 router.get('/search', function(req, res, next) {
     try {
@@ -31,15 +27,22 @@ router.get('/search', function(req, res, next) {
     }catch(err){
 
     }
+    var data={
+        'title':'Search',
+        'webSiteName':'ExpressBlog',
+        'message':'',
+        'data':[]
+    }
+
     data.loginStatus=username?1:0;
-    // res.send("qqq");
+    data.message='请输入查询条件';
     res.render('search', data);
     next();
 });
 
-router.post('/search', function(req, res, next) {
-    // res.Charset = "utf-8";
-    var str=req.body.search;
+router.get('/search/:search', function(req, res, next) {
+    var str=req.params.search;
+    // res.send(str);
     var searchData={
         $or:[
             {
@@ -51,21 +54,31 @@ router.post('/search', function(req, res, next) {
             {
                 intr:  new RegExp(str,'g')
             }
+        ],
+        $and:[
+            {
+                postStatus:true,
+                lockStatus:false
+            }
         ]
     };
-    // console.log(str);
-
-    // res.send(searchData);
     blogModel.find(searchData,function (err,blogs) {
-        var data={
-            status:1,
-            message:'ok',
-            search:str,
-            data:blogs
+        try {
+            var username=req.session.passport.user || false;
+        }catch(err){
+
         }
-        res.json(data);
+        var data={
+            'title':'Search',
+            'webSiteName':'ExpressBlog',
+            'message':'',
+            'data':[]
+        }
+        data.loginStatus=username?1:0;
+        data.message='未查询到结果！';
+        data.search=str;
+        data.data=blogs;
+        res.render('search', data);
     })
-
 });
-
 module.exports = router;

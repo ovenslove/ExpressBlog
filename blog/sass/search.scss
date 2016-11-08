@@ -7,7 +7,7 @@
   padding: 10px;
   .search-container{
     text-align: center;
-    #search-input{
+    .search-input{
       width: 50% ;
       height:40px;
       border-top-right-radius: 0;
@@ -47,5 +47,11 @@
 .search-listContainer{
   width: 100%;
   height:auto;
-  //background: #00aaee;
+  margin: 50px auto 20px;
+}
+.search-result-mark{
+  color: red;
+}
+.search-info{
+  text-align: center;
 }

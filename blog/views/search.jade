@@ -15,9 +15,36 @@ block content
     .main-box
         .search-box
             .field.inline.search-container
-                input#search-input(type="text",placeholder="something will show",name="search",value="")
+                -if(search)
+                    input.search-input(type="text",placeholder="Searching...",name="search",value=search)
+                -else
+                    input.search-input(type="text",placeholder="Searching...",name="search",value='')
                 .ui.submit.button#submit-btn Search
         .search-listContainer
+            -if(data != '')
+                each  val,key in data
+                    .ui.items.sim-blog
+                        .item
+                            .image.image-box
+                                img(src=val.imgUrl)
+                            .content
+                                a.header(href=" /blogs/"+val._id ) #{val.title}
+                                .meta
+                                    span
+                                        b Author:
+                                        |   #{val.author}
+                                        b(style="margin-left:10px;") Time:
+                                        |   #{new Date(val.addTime).toLocaleDateString()}
+                                .description(style="height: calc(100% - 85px);")
+                                    p  #{val.intr}
+                                .extra
+                                    i.unhide.icon
+                                    | #{val.viewCount}
+                                    | &emsp;
+                                    i.icon.thumbs.up
+                                    | #{val.priseCount}
+            -else
+                p.search-info #{message}
     include layout/footer
 
     script
