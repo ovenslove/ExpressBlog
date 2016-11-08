@@ -2369,7 +2369,7 @@ $(function () {
                     '<span><b>Author:</b>'+val.author+'<b style="margin-left:10px;">Time:</b>'+val.addTime+'</span> ' +
                     '</div> ' +
                     '<div style="height: calc(100% - 85px);" class="description"> ' +
-                    '<p>'+val.content+'</p> ' +
+                    '<p>'+val.intr+'</p> ' +
                     '</div>' +
                     ' <div class="extra">' +
                     '<i class="unhide icon"></i>2  <i class="icon thumbs up"></i>0' +
