@@ -14,7 +14,7 @@ var blogSchema = new mongoose.Schema(blogsSchemaConf);
 var blogModel = db.model('blog', blogSchema);
 
 router.get('/pachong', function(req, res, next) {
-    var url = "http://qianduan.guru/";
+    var url = "http://qianduan.guru";
     fetch(url)
         .then(function (res) {
             return res.text();
