@@ -19,6 +19,7 @@ var blogList = require('./routes/blogList');
 var trash = require('./routes/trash');
 var blogAction = require('./routes/blogAction');
 var search = require('./routes/search');
+var pachong = require('./routes/pachong');
 
 /*定义app*/
 var app = express();
@@ -51,6 +52,7 @@ app.use('/', blogList);
 app.use('/', trash);
 app.use('/', blogAction);
 app.use('/', search);
+app.use('/', pachong);
 
 
 
