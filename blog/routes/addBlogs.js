@@ -112,6 +112,7 @@ router.post('/home/addBlogs', function (req, res, next) {
                         });
                     }else {
                         blogData.addTime=new Date();
+                        blogData.updateTime=new Date();
                         var blogEntity = new blogModel(blogData);
                         if (blogEntity.save()) {
                             res.json({
@@ -133,6 +134,8 @@ router.post('/home/addBlogs', function (req, res, next) {
 
         }else {
             blogData.imgUrl=req.body.previewImageUrl;
+            blogData.addTime=new Date();
+            blogData.updateTime=new Date();
             var blogEntity = new blogModel(blogData);
             if (blogEntity.save()) {
                 res.json({
