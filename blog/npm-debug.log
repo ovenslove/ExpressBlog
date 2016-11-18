@@ -1,0 +1,49 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'browser' ]
+2 info using npm@3.10.8
+3 info using node@v6.9.1
+4 verbose run-script [ 'prebrowser', 'browser', 'postbrowser' ]
+5 info lifecycle api@0.0.0~prebrowser: api@0.0.0
+6 silly lifecycle api@0.0.0~prebrowser: no script for prebrowser, continuing
+7 info lifecycle api@0.0.0~browser: api@0.0.0
+8 verbose lifecycle api@0.0.0~browser: unsafe-perm in lifecycle true
+9 verbose lifecycle api@0.0.0~browser: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;E:\hcroot\droot\wwwroot\blog\node_modules\.bin;D:\Program Files\cmder\bin;D:\Program Files\cmder\vendor\conemu-maximus5\ConEmu\Scripts;D:\Program Files\cmder\vendor\conemu-maximus5;D:\Program Files\cmder\vendor\conemu-maximus5\ConEmu;C:\ProgramData\Oracle\Java\javapath;D:\Program Files\ImageMagick-7.0.2-Q16;C:\Program Files (x86)\Ruby23-x64\bin;d:\AppCan\AppCanStudioPersonalV3.2\HDK\emulator\mas\;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;E:\wamp\bin\php\php5.5.12;~/.composer/vendor/bin;E:\wamp\composer;E:\wamp\bin\node;D:\Program Files\Git\cmd;C:\Program Files (x86)\Vim\vim74;D:\MongoDB\bin;D:\Program Files\nginx-1.11.4;D:\Program Files\cmder;C:\Program Files\nodejs\;C:\Program Files (x86)\Ruby23-x64\bin;D:\Program Files (x86)\Egret\Egret Wing 3\bin;C:\Users\haidu\AppData\Local\atom\bin;C:\Users\haidu\AppData\Roaming\npm;D:\Program Files\Git\usr\bin;D:\Program Files\Git\usr\share\vim\vim74;D:\Program Files\cmder\
+10 verbose lifecycle api@0.0.0~browser: CWD: E:\hcroot\droot\wwwroot\blog
+11 silly lifecycle api@0.0.0~browser: Args: [ '/d /s /c',
+11 silly lifecycle   'browser-sync start --proxy http://localhost:3003 --files ./**/*' ]
+12 silly lifecycle api@0.0.0~browser: Returned: code: 3221225786  signal: null
+13 info lifecycle api@0.0.0~browser: Failed to exec browser script
+14 verbose stack Error: api@0.0.0 browser: `browser-sync start --proxy http://localhost:3003 --files ./**/*`
+14 verbose stack Exit status 3221225786
+14 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:255:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:191:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:191:7)
+14 verbose stack     at maybeClose (internal/child_process.js:877:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+15 verbose pkgid api@0.0.0
+16 verbose cwd E:\hcroot\droot\wwwroot\blog
+17 error Windows_NT 10.0.10586
+18 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "browser"
+19 error node v6.9.1
+20 error npm  v3.10.8
+21 error code ELIFECYCLE
+22 error api@0.0.0 browser: `browser-sync start --proxy http://localhost:3003 --files ./**/*`
+22 error Exit status 3221225786
+23 error Failed at the api@0.0.0 browser script 'browser-sync start --proxy http://localhost:3003 --files ./**/*'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the api package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     browser-sync start --proxy http://localhost:3003 --files ./**/*
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs api
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls api
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

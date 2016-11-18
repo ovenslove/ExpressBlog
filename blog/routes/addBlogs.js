@@ -68,6 +68,7 @@ router.post('/home/addBlogs', function (req, res, next) {
         var _id=req.body._id;
         var blogData = {
             blogId: userId,
+            blogType:0,
             title: req.body.blogTitle,
             postStatus:req.body.postStatus,
             author: user.nickname,
