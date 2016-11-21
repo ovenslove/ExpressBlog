@@ -19,6 +19,8 @@ block homecontent
                         th Title
                         th Introduce
                         th Mark
+                        -if(userType)
+                            th Author #{userType}
                         th AddTime
                         th View
                         th Prise
@@ -34,6 +36,8 @@ block homecontent
                                 a.header(href=" /blogs/#{val._id}" ) #{val.title}
                             td(style="max-width:300px;") #{val.intr}
                             td #{val.mark.join()}
+                            -if(userType)
+                                td #{val.author}
                             td #{new Date(val.addTime).toLocaleString()}
                             td #{val.viewCount}
                             td #{val.priseCount}

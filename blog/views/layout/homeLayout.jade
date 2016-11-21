@@ -17,9 +17,10 @@ block content
                 a(href="/")
                     li.list-item
                         span Home
-                a(href="/home/user")
-                    li.list-item
-                        span User
+                -if(!userType)
+                    a(href="/home/user")
+                        li.list-item
+                            span User
                 a(href="/home/addBlogs")
                     li.list-item
                         span NewBlog
@@ -45,9 +46,10 @@ block content
                 a(href="/home")
                     li.list-item
                         i.home.icon
-                a(href="/home/user")
-                    li.list-item
-                        i.user.icon
+                -if(!userType)
+                    a(href="/home/user")
+                        li.list-item
+                            i.user.icon
                 a(href="/home/addBlogs")
                     li.list-item
                         i.write.square.icon

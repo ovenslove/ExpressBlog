@@ -32,6 +32,7 @@ router.use(passport.session());
 /*-------------------权限认证相关----------------------------*/
 /*--------------------------------------------------------*/
 
+
 /*主首页*/
 router.get('/home', function(req, res, next) {
     // var username=req.session.passport.user.username;
@@ -40,6 +41,10 @@ router.get('/home', function(req, res, next) {
         'title':'个人主页'
     };
     if(req.isAuthenticated()){
+        if(req.session.passport){
+            userType=req.session.passport.user.userType;
+        }
+        data.userType=userType;
         res.render('home', data);
     }else{
         res.redirect('/login');
@@ -87,16 +92,4 @@ router.get('/home/chars',function (req, res, next) {
     };
     res.render('chars', data);
 });
-/*
-/!*垃圾桶*!/
-router.get('/home/trush',function (req, res, next) {
-    var data={
-        'title':'回收站'
-    };
-    res.render('trush', data);
-});
-*/
-
-
-
 module.exports = router;

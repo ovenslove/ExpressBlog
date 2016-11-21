@@ -66,9 +66,7 @@ passport.deserializeUser(function(user, done) {
 /*对需要验证后进入的页面t添加这个*/
 router.get('/login', function(req, res, next) {
     if(req.isAuthenticated()){
-        console.log(req.isAuthenticated());
-        console.log('----------------------验证-----------------------------')
-        res.redirect('/home');
+            res.redirect('/home');
     }
     else{
         res.render('login', data);

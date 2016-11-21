@@ -65,7 +65,8 @@ function registSave(ops) {
         username:ops.username,
         password:ops.password,
         registTime:new Date(),
-        loginLock:0
+        loginLock:0,
+        userType:0
     };
     /*生成一个实体*/
     var userEntity= new userModel(userData);

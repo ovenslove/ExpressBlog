@@ -29,17 +29,33 @@ router.get('/home/blogList',function (req, res, next) {
     };
     var limitNum=4;
     if(req.isAuthenticated()){
-        var  userId=req.session.passport.user._id;
-
-        blogModel.count({blogId:userId,lockStatus:false},function (err ,count) {
-            blogModel.find({blogId:userId,lockStatus:false}).sort({'addTime':-1}).limit(limitNum).skip(0).exec(function(err,blogs){
-                var pages=Math.ceil(count / limitNum);
-                data.list=blogs;
-                data.pages=pages;
-                data.curPage=0;
-                res.render('blogList', data);
+        if(req.session.passport){
+            userType=req.session.passport.user.userType;
+            data.userType=userType;
+        }
+        if(userType===999){
+            blogModel.count({lockStatus:false},function (err ,count) {
+                blogModel.find({lockStatus:false}).sort({'addTime':-1}).limit(limitNum).skip(0).exec(function(err,blogs){
+                    var pages=Math.ceil(count / limitNum);
+                    data.list=blogs;
+                    data.pages=pages;
+                    data.curPage=0;
+                    res.render('blogList', data);
+                });
             });
-        });
+        }else {
+            var  userId=req.session.passport.user._id;
+            blogModel.count({blogId:userId,lockStatus:false},function (err ,count) {
+                blogModel.find({blogId:userId,lockStatus:false}).sort({'addTime':-1}).limit(limitNum).skip(0).exec(function(err,blogs){
+                    var pages=Math.ceil(count / limitNum);
+                    data.list=blogs;
+                    data.pages=pages;
+                    data.curPage=0;
+                    res.render('blogList', data);
+                });
+            });
+        }
+
 
     }else {
         res.redirect('/login');
@@ -55,18 +71,36 @@ router.get('/home/blogList/:id',function (req, res, next) {
     var page=req.params.id-1;
     var limitNum=4;
     if(req.isAuthenticated()){
-        var  userId=req.session.passport.user._id;
+        if(req.session.passport){
+            userType=req.session.passport.user.userType
+            data.userType=userType;
+        }
 
-        blogModel.count({blogId:userId,lockStatus:false},function (err ,count) {
-            blogModel.find({blogId:userId,lockStatus:false}).sort({'addTime':-1}).limit(limitNum).skip(page*limitNum).exec(function(err,blogs){
-                var pages=Math.ceil(count / limitNum);
-                data.list=blogs;
-                data.pages=pages;
-                data.curPage=page;
-                // res.send(data);
-                res.render('blogList', data);
+        if(userType===999){
+            blogModel.count({lockStatus:false},function (err ,count) {
+                blogModel.find({lockStatus:false}).sort({'addTime':-1}).limit(limitNum).skip(page*limitNum).exec(function(err,blogs){
+                    var pages=Math.ceil(count / limitNum);
+                    data.list=blogs;
+                    data.pages=pages;
+                    data.curPage=page;
+                    // res.send(data);
+                    res.render('blogList', data);
+                });
             });
-        });
+        }else {
+            var  userId=req.session.passport.user._id;
+            blogModel.count({blogId:userId,lockStatus:false},function (err ,count) {
+                blogModel.find({blogId:userId,lockStatus:false}).sort({'addTime':-1}).limit(limitNum).skip(page*limitNum).exec(function(err,blogs){
+                    var pages=Math.ceil(count / limitNum);
+                    data.list=blogs;
+                    data.pages=pages;
+                    data.curPage=page;
+                    // res.send(data);
+                    res.render('blogList', data);
+                });
+            });
+        }
+
 
     }else {
         res.redirect('/login');

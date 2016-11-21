@@ -15,24 +15,21 @@ block content
             .side-bar-close-btn
                 i.remove.icon
             ul.list-group
-                li.list-item
-                    span 首页
-                li.list-item
-                    span 新建文章
-                li.list-item
-                    span 用户信息
-                li.list-item
-                    span 文章列表
-                li.list-item
-                    span 文章分类
-                li.list-item
-                    span 用户管理
-                li.list-item
-                    span 访问数据
-                li.list-item
-                    span 系统配置
-                li.list-item
-                    span 回收站
+                a(href="/")
+                    li.list-item
+                        span Home
+                a(href="/admin/blogList")
+                    li.list-item
+                        span BlogList
+                a(href="/admin/userList")
+                    li.list-item
+                        span category
+                a(href="/admin/chars")
+                    li.list-item
+                        span WebChars
+                a(href="/admin/trash")
+                    li.list-item
+                        span Trash
             .sign-out-box
                 span 登出
                 i.sign.out.icon
@@ -40,32 +37,29 @@ block content
             .side-bar-open-btn
                 i.content.icon
             ul.list-group
-                li.list-item
-                    i.home.icon
-                li.list-item
-                    i.user.icon
-                li.list-item
-                    i.write.square.icon
-                li.list-item
-                    i.list.layout.icon
-                li.list-item
-                    i.grid.layout.icon
-                li.list-item
-                    i.users.icon
-                li.list-item
-                    i.line.chart.icon
-                li.list-item
-                    i.options.icon
-                li.list-item
-                    i.trash.outline.icon
+                a(href="/admin")
+                    li.list-item
+                        i.home.icon
+                a(href="/admin/blogList")
+                    li.list-item
+                        i.list.layout.icon
+                a(href="/admin/userList")
+                    li.list-item
+                        i.grid.layout.icon
+                a(href="/admin/chars")
+                    li.list-item
+                        i.line.chart.icon
+                a(href="/admin/trash")
+                    li.list-item
+                        i.trash.outline.icon
             .sign-out-box
                 i.sign.out.icon
 
 
         .pull-top
         .home-show-box
-            block homecontent
+            block admincontent
     //include layout/footer
     script
         | $(function(){NProgress.done();})
-    script(src="/js/home.js")
+    script(src="/js/homeLayout.js")
