@@ -7,6 +7,7 @@ $(".back2top").on('click',function () {
 });
 $(function () {
     $("body").scrollTop(0);
+    sessionStorage.clear();
 });
 
 $("body").on('mousewheel', function(event) {
