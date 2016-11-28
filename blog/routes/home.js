@@ -64,6 +64,9 @@ router.get('/home/oneWord', function(req, res, next) {
         var s1=$(".entry.cf").eq(0).find('p').eq(0).find('strong').html();
         var s2=$(".entry.cf").eq(0).find('div').eq(3).html();
         var s3=$(".entry.cf").eq(0).find('p').eq(1).html();
+        s1==null ?s1=' ':s1;
+        s2==null ?s2=' ':s2;
+        s3==null ?s3=' ':s3;
         // https://www.npmjs.com/package/cheerio
         // https://github.com/jschr/textillate
         res.json({

@@ -31,16 +31,32 @@ router.get('/', function(req, res, next) {
     /*根据schema生成模型*/
     var blogModel = db.model('blog',blogSchema);
 
-    try {
-        var username=req.session.passport.user || false;
-    }catch(err){
-
+    if(req.session.passport){
+        var username=req.session.passport.user;
     }
+
     /*带limit()*/
     blogModel.find({postStatus:true,lockStatus:false}).sort({'addTime':-1}).limit(20).skip(0).exec(function(err,blogs){
         data.list=blogs;
         data.loginStatus=username?1:0;
         res.render('index', data);
+    });
+
+});
+
+router.get('/pages/:id', function(req, res, next) {
+    var page=req.params.id;
+    /*根据schema生成模型*/
+    var blogModel = db.model('blog',blogSchema);
+
+    /*带limit()*/
+    blogModel.find({postStatus:true,lockStatus:false}).sort({'addTime':-1}).limit(5).skip(15+page*5).exec(function(err,blogs){
+        var backData={
+            "status":1,
+            "msg":"ok",
+            "blogs":blogs
+        }
+        res.json(backData);
     });
 
 });

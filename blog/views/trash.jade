@@ -82,8 +82,8 @@ block homecontent
                                 - else
                                     li.pagination-listItem
                                         a(href='/home/trash/' + (x + 1))=x + 1
-                                    li.pagination-listItem
-                                        a(href='/home/trash/' + (pages)) End
+                            li.pagination-listItem
+                                a(href='/home/trash/' + (pages)) End
                 -else
                     span 暂无数据
     script(src="/js/trash.js")

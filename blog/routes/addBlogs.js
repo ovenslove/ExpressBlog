@@ -81,10 +81,6 @@ router.post('/home/addBlogs', function (req, res, next) {
             priseCount:0,
             lockStatus:false
         };
-        console.log(blogData);
-        console.log(actionType)
-        console.log(_id)
-
       if(req.body.imageType==1){
             var paths=path.normalize('/images/blogPreviewImages/');
 
@@ -93,44 +89,56 @@ router.post('/home/addBlogs', function (req, res, next) {
             var dataBuffer = new Buffer(base64Data, 'base64');
             var name='image-'+timeid+'.png';
             var logoUrl=paths+name;
-            fs.writeFile('public'+logoUrl, dataBuffer, function(err) {
-                if(err){
-                    res.send(err);
-                }else{
-                    blogData['imgUrl']=logoUrl;
-                    var mongoStatus;
-                    if(actionType == 1){
-                        console.log("000000000000000------")
-                        /*更新数据*/
-                        blogData.updateTime=new Date();
-                        mongoStatus=blogModel.update({_id:_id},{$set:blogData},function (err) {
-                            console.log("1111111------")
-                            res.json({
-                                status:1,
-                                message:'Update Success!'
-                            });
-                        });
-                    }else {
-                        blogData.addTime=new Date();
-                        blogData.updateTime=new Date();
-                        var blogEntity = new blogModel(blogData);
-                        if (blogEntity.save()) {
-                            res.json({
-                                status:1,
-                                message:'Add Success!'
-                            });
-                        } else {
-                            res.json({
-                                status:0,
-                                message:'Add Error'
-                            });
-                        }
-                    }
-                    console.log(mongoStatus);
 
-                    // res.json(blogData);
-                }
-            });
+          /**/
+          blogModel.findOne({_id:_id},function (err, blog) {
+              var removePath=blog.imgUrl;
+              console.log(removePath);
+
+              fs.unlink('public'+removePath, function(err){
+                  if(err){
+                      throw err;
+                  }
+                  console.log(removePath+'删除成功');
+                  fs.writeFile('public'+logoUrl, dataBuffer, function(err) {
+                      if(err){
+                          res.send(err);
+                      }else{
+                          blogData['imgUrl']=logoUrl;
+                          if(actionType == 1){
+                              /*更新数据*/
+                              blogData.updateTime=new Date();
+                              blogModel.update({_id:_id},{$set:blogData},function (err) {
+                                  res.json({
+                                      status:1,
+                                      message:'Update Success!'
+                                  });
+                              });
+                          }else {
+                              blogData.addTime=new Date();
+                              blogData.updateTime=new Date();
+                              var blogEntity = new blogModel(blogData);
+                              if (blogEntity.save()) {
+                                  res.json({
+                                      status:1,
+                                      message:'Add Success!'
+                                  });
+                              } else {
+                                  res.json({
+                                      status:0,
+                                      message:'Add Error'
+                                  });
+                              }
+                          }
+                      }
+                  });
+              })
+
+
+          })
+
+
+
 
         }else {
             blogData.imgUrl=req.body.previewImageUrl;

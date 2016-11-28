@@ -21,6 +21,28 @@
   bottom:-0.75em;
   left:0;
 }
+.noMoreBlogs{
+  height:30px;
+  width:100%;
+  display: block;
+  text-align: center;
+  line-height:30px;
+}
+.viewMoreBtn{
+  background: #2eacdc;
+  height: 30px;
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0 15px;
+  float: right;
+  color: #fff;
+  line-height: 30px;
+  margin-top: -5px !important;
+  cursor: pointer;
+}
+.viewMoreBtn:hover{
+  background: #00CC66;
+}
 .side-box{
   display: none;
   height:auto;

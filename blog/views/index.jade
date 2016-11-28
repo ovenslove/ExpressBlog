@@ -37,6 +37,12 @@ block content
                             | &emsp;
                             i.icon.thumbs.up
                             | #{val.priseCount}
+                            -if(val.blogUrl =='' || val.blogUrl==undefined)
+                                a.header(href="/blogs/" + val._id )
+                                    span.viewMoreBtn More
+                            -else
+                                a.header(href=val.blogUrl )
+                                    span.viewMoreBtn More
     .side-box
         ul
             a(href="https://github.com/",target="_blanck")
