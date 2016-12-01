@@ -1,10 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>首页改造中</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/windows.css">
+    <title>桌面系统</title>
+    <style>
+        .windowsBarContainerListGroup{
+            width: auto;
+            height:100%;
+            min-width:500px;
+            display: block;
+
+        }
+        .windowsBarContainerListItem{
+            float: left;
+            height:30px;
+            min-width: 36px;
+            list-style:none;
+            line-height:30px;
+            text-align: center;
+            display: block;
+        }
+        .windowsBarContainerListItem:hover{
+            background: rgba(255,255,255,0.15);
+        }
+        .windowsIco{
+            color: #fff;
+        }
+        .windowsIco:hover{
+            color: #006cc2;
+        }
+        .searchIco{
+            color: #fff;
+        }
+        .edgeIco{
+            color: #006cc2;
+         }
+        .chromeIco{
+            color: #fff;
+        }
+        .windowsMenuContainer{
+            height:600px;
+            width:800px;
+            background: rgba(0,0,0,0.5);
+            position: absolute;
+            left:0;
+            bottom:100%;
+            border-top:1px solid #353535;
+            border-right:1px solid #353535;
+            max-width:50vw;
+            max-height: 50vh;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-首页改造。。。
+<div class="systemWindowsPage" id="systemWindowsPage">
+
+</div>
+<div class="windowsBarContainer bottom">
+    <ul class="windowsBarContainerListGroup">
+        <li class="windowsBarContainerListItem  windowsIco js_windowsBtn">
+            <i class="fa fa-windows fa-1x  "></i>
+        </li>
+        <li class="windowsBarContainerListItem searchIco">
+            <i class="fa fa-search fa-1x "></i>
+        </li>
+        <li class="windowsBarContainerListItem edgeIco">
+            <i class="fa fa-edge fa-1x "></i>
+        </li>
+        <li class="windowsBarContainerListItem chromeIco">
+            <i class="fa fa-chrome fa-1x "></i>
+        </li>
+    </ul>
+    <div class="windowsMenuContainer tipsContainer">
+
+    </div>
+</div>
 </body>
+<script src="js/jquery-1.12.4.min.js"></script>
+<script>
+$(function () {
+    $(".js_windowsBtn").on('click',function () {
+//        alert("11");/
+        $(".windowsMenuContainer").fadeToggle(200);
+    })
+    $(".systemWindowsPage").on('click',function () {
+        $(".tipsContainer").fadeOut(200);
+    })
+});
+</script>
 </html>
